@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="CoreUObject">
+      <UniqueIdentifier>{9A662CF7-061C-A5EC-8F10-9FC3FBC49BF0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{DBC7D3B0-C769-FE86-B024-12DB9C6585D7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="minhook">
+      <UniqueIdentifier>{5A9B3AC7-C67A-B962-CF92-44393BF11FC4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="minhook\src">
+      <UniqueIdentifier>{717688CF-DD2B-01C5-6620-FB9BD2D4F7C8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="minhook\src\hde">
+      <UniqueIdentifier>{71D4EBB2-DD5F-5977-E670-DC6B527BB577}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\minhook\src\buffer.c">
+      <Filter>minhook\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\minhook\src\hde\hde32.c">
+      <Filter>minhook\src\hde</Filter>
+    </ClCompile>
+    <ClCompile Include="..\minhook\src\hde\hde64.c">
+      <Filter>minhook\src\hde</Filter>
+    </ClCompile>
+    <ClCompile Include="..\minhook\src\hook.c">
+      <Filter>minhook\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\minhook\src\trampoline.c">
+      <Filter>minhook\src</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreUObject\Class.cpp">
+      <Filter>CoreUObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreUObject\Name.cpp">
+      <Filter>CoreUObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreUObject\Object.cpp">
+      <Filter>CoreUObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreUObject\Struct.cpp">
+      <Filter>CoreUObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Engine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\World.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+</Project>
