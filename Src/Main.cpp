@@ -12,6 +12,8 @@
 
 #include "OnlineSubsystemUtils/OnlineBeaconHost.hpp"
 
+#include "GameplayAbilities/AbilitySystemComponent.hpp"
+
 void Init()
 {
     MH_Initialize();
@@ -61,6 +63,8 @@ void Init()
 
     AOnlineBeacon::Init();
     AOnlineBeaconHost::Init();
+
+    UAbilitySystemComponent::Init();
 
     // GIsClient/GIsServer
     {

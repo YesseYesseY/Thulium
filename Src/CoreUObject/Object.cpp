@@ -57,6 +57,14 @@ std::string UObject::GetName() const
     return Name.ToString();
 }
 
+std::wstring UObject::GetNameW() const
+{
+    if (!this)
+        return L"None";
+
+    return Name.ToWString();
+}
+
 std::string UObject::GetPathName() const
 {
     if (!this)

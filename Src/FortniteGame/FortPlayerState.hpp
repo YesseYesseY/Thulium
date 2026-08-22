@@ -1,10 +1,13 @@
 #pragma once
 #include "../Engine/PlayerState.hpp"
 #include "FortPawn.hpp"
+#include "FortAbilitySystemComponent.hpp"
 
 class AFortPlayerState : public APlayerState
 {
     STATIC_CLASS(L"/Script/FortniteGame.FortPlayerState");
+
+    CLASS_PROP(UFortAbilitySystemComponent*, AbilitySystemComponent);
 
 private:
     static inline void (*_ApplyCustomizationToCharacter)(AFortPlayerState*, AFortPawn*) = nullptr;

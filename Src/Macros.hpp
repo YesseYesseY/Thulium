@@ -74,4 +74,16 @@ public: \
     void _put_##Name(Type val) { static int32 offset = StaticStruct()->GetProp(#Name)->Offset; *(Type*)(int64(this) + offset) = val; } \
     __declspec(property(get = _get_##Name, put = _put_##Name)) Type Name;
 
+#define STRUCT_BIT(Name) \
+public: \
+    bool _get_##Name() const { static int32 offset = -1; static uint8 fieldmask = 0; \
+        if (offset == -1) { auto prop = StaticStruct()->GetPropAs<UBoolProperty>(#Name); offset = prop->Offset; fieldmask = prop->FieldMask; } \
+        return (*(uint8*)(int64(this) + offset) & fieldmask) != 0; } \
+    void _put_##Name(bool val) const { static int32 offset = -1; static uint8 fieldmask = 0; \
+        if (offset == -1) { auto prop = StaticStruct()->GetPropAs<UBoolProperty>(#Name); offset = prop->Offset; fieldmask = prop->FieldMask; } \
+        if (val) *(uint8*)(int64(this) + offset) |= fieldmask; else *(uint8*)(int64(this) + offset) &= ~fieldmask; } \
+    __declspec(property(get = _get_##Name, put = _put_##Name)) bool Name;
+
+
+
 #define UFUNC(Name) static auto Func = Class->GetFunc(Name)

@@ -14,7 +14,7 @@ FName::FName(const wchar_t* Str)
     *this = Args.Ret;
 }
 
-std::string FName::ToString() const
+FString FName::ToFString() const
 {
     static auto Lib = UObject::FindObject(L"/Script/Engine.Default__KismetStringLibrary");
     static auto Func = UObject::FindFunction(L"/Script/Engine.KismetStringLibrary:Conv_NameToString");
@@ -24,7 +24,21 @@ std::string FName::ToString() const
         FString Ret;
     } Args { *this };
     Lib->ProcessEvent(Func, &Args);
-    auto Ret = Args.Ret.ToString();
-    Args.Ret.Free();
+    return Args.Ret;
+}
+
+std::string FName::ToString() const
+{
+    auto FStr = ToFString();
+    auto Ret = FStr.ToString();
+    FStr.Free();
+    return Ret;
+}
+
+std::wstring FName::ToWString() const
+{
+    auto FStr = ToFString();
+    auto Ret = FStr.ToWString();
+    FStr.Free();
     return Ret;
 }

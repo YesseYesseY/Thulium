@@ -3,6 +3,7 @@
 #include "FortGameStateAthena.hpp"
 #include "FortPlayerController.hpp"
 #include "FortPlayerState.hpp"
+#include "FortAbilitySet.hpp"
 
 class AFortGameModeAthena : public AFortGamePvPBase
 {
@@ -53,6 +54,9 @@ class AFortGameModeAthena : public AFortGamePvPBase
         auto PlayerState = Controller->GetPlayerState<AFortPlayerState>();
         auto Pawn = Controller->GetPawn<AFortPawn>();
         PlayerState->ApplyCustomizationToCharacter(Pawn);
+
+        static auto AS = UObject::FindObject<UFortAbilitySet>(L"/Game/Abilities/Player/Generic/Traits/DefaultPlayer/GAS_DefaultPlayer.GAS_DefaultPlayer");
+        AS->Give(PlayerState->AbilitySystemComponent);
     }
 
     static void Init()

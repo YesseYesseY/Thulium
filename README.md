@@ -4,6 +4,7 @@ Fortnite GameServer
 # Features
 ## Battle Royale
  - Joining Game
+ - Abilities
 
 # Supported Builds
  - 3.5-CL-4008490

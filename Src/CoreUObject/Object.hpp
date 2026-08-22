@@ -89,6 +89,7 @@ public:
 
     void ProcessEvent(UFunction* function, void* args = nullptr);
     std::string GetName() const;
+    std::wstring GetNameW() const;
     std::string GetPathName() const;
     std::string GetFullName() const;
     bool IsA(UClass* Other) const;

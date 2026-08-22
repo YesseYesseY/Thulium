@@ -12,6 +12,7 @@ class UClass : public UStruct
         _offset_DefaultObject = 0xF8;
     }
 
+    void HookVTable(int32 Idx, void* Hook, void** Original = nullptr);
     void HookVTable(const std::string& Name, void* Hook, void** Original = nullptr);
 
     template <typename T>
