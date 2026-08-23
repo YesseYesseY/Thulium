@@ -13,4 +13,25 @@ class AActor : public UObject
         ProcessEvent(Func, &Ret);
         return Ret;
     }
+
+    void ForceNetUpdate()
+    {
+        UFUNC("ForceNetUpdate");
+        ProcessEvent(Func);
+    }
+
+    AActor* GetOwner()
+    {
+        UFUNC("GetOwner");
+
+        AActor* Ret;
+        ProcessEvent(Func, &Ret);
+        return Ret;
+    }
+
+    template <typename T>
+    T* GetOwner()
+    {
+        return (T*)GetOwner();
+    }
 };

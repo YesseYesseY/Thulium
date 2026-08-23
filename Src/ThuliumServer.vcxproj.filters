@@ -7,6 +7,9 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{DBC7D3B0-C769-FE86-B024-12DB9C6585D7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FortniteGame">
+      <UniqueIdentifier>{0ACB4750-F62D-D7F4-9FB3-0FAB8BF5A277}</UniqueIdentifier>
+    </Filter>
     <Filter Include="minhook">
       <UniqueIdentifier>{5A9B3AC7-C67A-B962-CF92-44393BF11FC4}</UniqueIdentifier>
     </Filter>
@@ -50,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="Engine\World.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="FortniteGame\FortInventory.cpp">
+      <Filter>FortniteGame</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
   </ItemGroup>

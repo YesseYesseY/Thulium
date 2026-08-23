@@ -5,6 +5,12 @@ Fortnite GameServer
 ## Battle Royale
  - Joining Game
  - Abilities
+ - Inventory
+   - [x] Giving Items
+   - [ ] Removing Items
+   - [x] Equipping Items
+   - [ ] Picking Up Items
+   - [ ] Dropping Items
 
 # Supported Builds
  - 3.5-CL-4008490

@@ -284,17 +284,29 @@
 		inline const ArrayElementType& GetUnsafe(int32 Index) const { return Data[Index]; }
 
 	public:
+		inline void Reserve(int32 Count, int32 ElemSize = ElementSize)
+		{
+			if (GetSlack() < Count)
+				MaxElements += Count;
+
+			Data = static_cast<ArrayElementType*>(FMemory::Realloc(Data, MaxElements * ElemSize, 0));
+		}
+
 		/* Adds to the array if there is still space for one more element */
-		inline bool Add(const ArrayElementType& Element)
+		inline void Add(const ArrayElementType& Element, int32 ElemSize = ElementSize)
 		{
 			if (GetSlack() <= 0)
-				return false;
+				Reserve(3, ElemSize);
 
-			Data[NumElements] = Element;
+            memcpy((ArrayElementType*)(int64(Data) + (NumElements * ElemSize)), &Element, ElemSize);
 			NumElements++;
-
-			return true;
 		}
+
+        template <typename T>
+        inline void Add(const ArrayElementType& Element)
+        {
+            Add(Element, T::Size());
+        }
 
 		inline bool Remove(int32 Index, int32 ElemSize = ElementSize)
 		{

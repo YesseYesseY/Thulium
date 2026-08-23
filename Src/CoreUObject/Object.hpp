@@ -43,6 +43,7 @@ ENUM_CLASS_FLAGS(EObjectFlags);
 class UStruct;
 class UClass;
 class UFunction;
+class UEnum;
 
 class UObject
 {
@@ -85,6 +86,12 @@ public:
     {
         static auto UFunctionClass = FindObject(L"/Script/CoreUObject.Function");
         return (UFunction*)_StaticFindObject(UFunctionClass, nullptr, Name, false);
+    }
+
+    static UEnum* FindEnum(const wchar_t* Name)
+    {
+        static auto UEnumClass = FindObject(L"/Script/CoreUObject.Enum");
+        return (UEnum*)_StaticFindObject(UEnumClass, nullptr, Name, false);
     }
 
     void ProcessEvent(UFunction* function, void* args = nullptr);

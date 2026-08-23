@@ -1008,6 +1008,9 @@ namespace Memcury
 
         auto RelativeOffset(uint32_t offset) -> Scanner
         {
+            if (!_address.IsValid())
+                return *this;
+
             _address.RelativeOffset(offset);
 
             return *this;
@@ -1015,6 +1018,9 @@ namespace Memcury
 
         auto AbsoluteOffset(uint32_t offset) -> Scanner
         {
+            if (!_address.IsValid())
+                return *this;
+
             _address.AbsoluteOffset(offset);
 
             return *this;

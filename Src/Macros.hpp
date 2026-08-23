@@ -15,6 +15,8 @@
 #endif
 #define MsgBox(...) MessageBoxA(NULL, std::format(__VA_ARGS__).c_str(), MsgBoxTitle, 0)
 
+#define COMMA ,
+
 #define STATIC_CLASS(Name) \
 public: \
     static UClass* StaticClass() \
@@ -52,16 +54,16 @@ public: \
 
 #define CLASS_PROP(Type, Name) \
 public: \
-    Type& _get_##Name() const { static int32 offset = Class->GetProp(#Name)->Offset; return *(Type*)(int64(this) + offset); } \
-    void _put_##Name(Type val) { static int32 offset = Class->GetProp(#Name)->Offset; *(Type*)(int64(this) + offset) = val; } \
+    inline Type& _get_##Name() const { static int32 offset = Class->GetProp(#Name)->Offset; return *(Type*)(int64(this) + offset); } \
+    inline void _put_##Name(Type val) { static int32 offset = Class->GetProp(#Name)->Offset; *(Type*)(int64(this) + offset) = val; } \
     __declspec(property(get = _get_##Name, put = _put_##Name)) Type Name;
 
 #define CLASS_BIT(Name) \
 public: \
-    bool _get_##Name() const { static int32 offset = -1; static uint8 fieldmask = 0; \
+    inline bool _get_##Name() const { static int32 offset = -1; static uint8 fieldmask = 0; \
         if (offset == -1) { auto prop = Class->GetPropAs<UBoolProperty>(#Name); offset = prop->Offset; fieldmask = prop->FieldMask; } \
         return (*(uint8*)(int64(this) + offset) & fieldmask) != 0; } \
-    void _put_##Name(bool val) const { static int32 offset = -1; static uint8 fieldmask = 0; \
+    inline void _put_##Name(bool val) const { static int32 offset = -1; static uint8 fieldmask = 0; \
         if (offset == -1) { auto prop = Class->GetPropAs<UBoolProperty>(#Name); offset = prop->Offset; fieldmask = prop->FieldMask; } \
         if (val) *(uint8*)(int64(this) + offset) |= fieldmask; else *(uint8*)(int64(this) + offset) &= ~fieldmask; } \
     __declspec(property(get = _get_##Name, put = _put_##Name)) bool Name;
@@ -70,19 +72,36 @@ public: \
 
 #define STRUCT_PROP(Type, Name) \
 public: \
-    Type& _get_##Name() const { static int32 offset = StaticStruct()->GetProp(#Name)->Offset; return *(Type*)(int64(this) + offset); } \
-    void _put_##Name(Type val) { static int32 offset = StaticStruct()->GetProp(#Name)->Offset; *(Type*)(int64(this) + offset) = val; } \
+    inline Type& _get_##Name() const { static int32 offset = StaticStruct()->GetProp(#Name)->Offset; return *(Type*)(int64(this) + offset); } \
+    inline void _put_##Name(Type val) { static int32 offset = StaticStruct()->GetProp(#Name)->Offset; *(Type*)(int64(this) + offset) = val; } \
     __declspec(property(get = _get_##Name, put = _put_##Name)) Type Name;
 
 #define STRUCT_BIT(Name) \
 public: \
-    bool _get_##Name() const { static int32 offset = -1; static uint8 fieldmask = 0; \
+    inline bool _get_##Name() const { static int32 offset = -1; static uint8 fieldmask = 0; \
         if (offset == -1) { auto prop = StaticStruct()->GetPropAs<UBoolProperty>(#Name); offset = prop->Offset; fieldmask = prop->FieldMask; } \
         return (*(uint8*)(int64(this) + offset) & fieldmask) != 0; } \
-    void _put_##Name(bool val) const { static int32 offset = -1; static uint8 fieldmask = 0; \
+    inline void _put_##Name(bool val) const { static int32 offset = -1; static uint8 fieldmask = 0; \
         if (offset == -1) { auto prop = StaticStruct()->GetPropAs<UBoolProperty>(#Name); offset = prop->Offset; fieldmask = prop->FieldMask; } \
         if (val) *(uint8*)(int64(this) + offset) |= fieldmask; else *(uint8*)(int64(this) + offset) &= ~fieldmask; } \
     __declspec(property(get = _get_##Name, put = _put_##Name)) bool Name;
+
+
+
+#define STATIC_ENUM(Name) \
+public: \
+    static UEnum* StaticEnum() \
+    { \
+        static UEnum* Ret = UObject::FindEnum(Name); \
+        return Ret; \
+    }
+
+#define ENUM_PROP(Name) \
+    static inline int64 Name() \
+    { \
+        static int64 Ret = StaticEnum()->GetValue(#Name); \
+        return Ret; \
+    } \
 
 
 

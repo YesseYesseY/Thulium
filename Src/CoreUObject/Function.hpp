@@ -18,6 +18,9 @@ class UFunction : public UStruct
         auto Scanner = Memcury::Scanner(Func);
         Scanner.ScanForOpCode(0xFF, HasValidate ? 1 : 0);
 
-        return *Scanner.AbsoluteOffset(2).GetAs<int32*>() / 8;
+        hde64s thing;
+        hde64_disasm(Scanner.GetAs<void*>(), &thing);
+
+        return thing.disp.disp32 / 8;
     }
 };

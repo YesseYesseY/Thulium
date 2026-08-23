@@ -9,6 +9,7 @@
 
 #include "FortniteGame/FortGameModeAthena.hpp"
 #include "FortniteGame/FortPlayerState.hpp"
+#include "FortniteGame/FortPlayerControllerAthena.hpp"
 
 #include "OnlineSubsystemUtils/OnlineBeaconHost.hpp"
 
@@ -51,6 +52,17 @@ void Init()
     UProperty::Init();
     UBoolProperty::Init();
     UFunction::Init();
+    UEnum::Init();
+
+    // GameVersion/EngineVersion
+    {
+        auto VerStr = UKismetSystemLibrary::GetEngineVersion();
+        EngineVersion = std::stof(VerStr);
+        GameVersion = std::stof(VerStr.substr(VerStr.find_last_of('-') + 1));
+
+        if (VerStr.starts_with("4.26.1"))
+            EngineVersion = 4.261f;
+    }
 
 #if SERVER
     UEngine::Init();
@@ -59,6 +71,7 @@ void Init()
     UReplicationDriver::Init();
 
     AFortGameModeAthena::Init();
+    AFortPlayerControllerAthena::Init();
     AFortPlayerState::Init();
 
     AOnlineBeacon::Init();
@@ -74,30 +87,25 @@ void Init()
         auto Scanner = Memcury::Scanner::FindStringRef(L"STAT_PlatformInit");
 
         std::vector<uint8> OpCodes = { 0xC6, 0x88 };
-        auto RelOff = 2;
-        auto AbsOff = 1;
-        uint8 SecondByte = 0;
-        uint8 ThirdByte = 0;
+        uintptr_t MovClient = 0;
+        uintptr_t MovServer = 0;
+        hde64s Hde64Client;
+        hde64s Hde64Server;
 
         Scanner.ScanForEitherOpCode(OpCodes);
-        auto GIsClientMov = Scanner.Get();
-        SecondByte = *(uint8*)(int64(GIsClientMov) + 1);
-        ThirdByte = *(uint8*)(int64(GIsClientMov) + 2);
-        if (SecondByte == 0x88)
+        hde64_disasm(Scanner.GetAs<void*>(), &Hde64Client);
+        MovClient = Scanner.Get();
+
+        do
         {
-            RelOff = 3;
-            AbsOff = 0;
-        }
-
-        *Memcury::PE::Address(GIsClientMov).RelativeOffset(RelOff).AbsoluteOffset(AbsOff).GetAs<bool*>() = false;
-
-        Scanner.ScanForEitherOpCode(OpCodes);
-
-        if (*(uint8*)(Scanner.Get() + 2) != ThirdByte)
             Scanner.ScanForEitherOpCode(OpCodes);
+            hde64_disasm(Scanner.GetAs<void*>(), &Hde64Server);
+        }
+        while (Hde64Server.modrm != Hde64Client.modrm);
+        MovServer = Scanner.Get();
 
-        auto GIsServerMov = Scanner.Get();
-        *Memcury::PE::Address(GIsServerMov).RelativeOffset(RelOff).AbsoluteOffset(AbsOff).GetAs<bool*>() = true;
+        *(bool*)(MovClient + Hde64Client.len + *(int32*)&Hde64Client.disp.disp32) = false;
+        *(bool*)(MovServer + Hde64Server.len + *(int32*)&Hde64Server.disp.disp32) = true;
     }
 
     UWorld::GetWorld()->OwningGameInstance->LocalPlayers.Remove(0);
@@ -135,7 +143,7 @@ DWORD MainThread(void*)
 {
     Init();
 
-    // MsgBox("{:X}", UObject::FindFunction(L"/Script/Engine.GameModeBase:SpawnDefaultPawnFor")->GetVTableIndex());
+    // MsgBox("{}", UObject::FindEnum(L"/Script/FortniteGame.EFortItemType")->GetValue("EventPurchaseTracker"));
 
 #if CLIENT
     auto Viewport = UEngine::GetEngine()->GameViewport;
@@ -152,6 +160,8 @@ DWORD MainThread(void*)
 #else
 #define MapString L"open Athena_Terrain"
 #endif
+    UKismetSystemLibrary::ExecuteConsoleCommand(L"log LogFort VeryVerbose");
+
     UKismetSystemLibrary::ExecuteConsoleCommand(MapString);
 
     return 0;

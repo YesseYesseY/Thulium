@@ -4,6 +4,8 @@
 #include "NetDriver.hpp"
 #include "LevelCollection.hpp"
 #include "GameInstance.hpp"
+#include "GameplayStatics.hpp"
+#include "GameModeBase.hpp"
 
 enum class ESpawnActorCollisionHandlingMethod : uint8
 {
@@ -46,6 +48,13 @@ class UWorld : public UObject
     CLASS_PROP(UNetDriver*, NetDriver);
     CLASS_PROP(TArray<FLevelCollection>, LevelCollections);
     CLASS_PROP(UGameInstance*, OwningGameInstance);
+    CLASS_PROP(AGameModeBase*, AuthorityGameMode);
+
+    template <typename T = AGameModeBase>
+    T* GetGameMode()
+    {
+        return (T*)AuthorityGameMode;
+    }
 
 private:
     static inline AActor* (*_SpawnActor)(UWorld*, UClass*, FTransform&, FActorSpawnParameters&) = nullptr;
