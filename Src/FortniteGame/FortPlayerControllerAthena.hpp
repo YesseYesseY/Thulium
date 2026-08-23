@@ -1,6 +1,7 @@
 #pragma once
 #include "FortPlayerControllerPvP.hpp"
 #include "FortGameModeAthena.hpp"
+#include "FortKismetLibrary.hpp"
 
 class AFortPlayerControllerAthena : public AFortPlayerControllerPvP
 {
@@ -35,6 +36,36 @@ public:
         }
     }
 
+    static void ServerCheatHook(AFortPlayerControllerAthena* This, const FString& FMsg)
+    {
+        auto Msg = FMsg.ToWString();
+
+        if (Msg == L"devloadout")
+        {
+            static std::vector<std::pair<UFortItemDefinition*, int32>> Items = {
+                { UFortKismetLibrary::K2_GetResourceItemDefinition(EFortResourceType::Wood), 999 },
+                { UFortKismetLibrary::K2_GetResourceItemDefinition(EFortResourceType::Stone), 999 },
+                { UFortKismetLibrary::K2_GetResourceItemDefinition(EFortResourceType::Metal), 999 },
+
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Ammo/AthenaAmmoDataShells.AthenaAmmoDataShells"), 999 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Ammo/AthenaAmmoDataEnergyCell.AthenaAmmoDataEnergyCell"), 999 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Ammo/AthenaAmmoDataBulletsMedium.AthenaAmmoDataBulletsMedium"), 999 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Ammo/AthenaAmmoDataBulletsLight.AthenaAmmoDataBulletsLight"), 999 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Ammo/AthenaAmmoDataBulletsHeavy.AthenaAmmoDataBulletsHeavy"), 999 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Ammo/AmmoDataRockets.AmmoDataRockets"), 999 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Weapons/WID_Assault_AutoHigh_Athena_SR_Ore_T03.WID_Assault_AutoHigh_Athena_SR_Ore_T03"), 1 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Weapons/WID_Shotgun_SlugFire_Athena_SR.WID_Shotgun_SlugFire_Athena_SR"), 1 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Weapons/WID_Sniper_BoltAction_Scope_Athena_SR_Ore_T03.WID_Sniper_BoltAction_Scope_Athena_SR_Ore_T03"), 1 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Consumables/KnockGrenade/Athena_KnockGrenade.Athena_KnockGrenade"), 1 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Consumables/Shields/Athena_Shields.Athena_Shields"), 3 },
+            };
+
+            auto Inventory = This->WorldInventory;
+            for (auto& thing : Items)
+                Inventory->AddItem(thing.first, thing.second);
+        }
+    }
+
 public:
     static void Init()
     {
@@ -42,5 +73,6 @@ public:
         Class->HookVTable("ServerAcknowledgePossession", ServerAcknowledgePossessionHook);
         Class->HookVTable("ServerExecuteInventoryItem", ServerExecuteInventoryItemHook);
         Class->HookVTable("ServerLoadingScreenDropped", ServerLoadingScreenDroppedHook, &ServerLoadingScreenDroppedOriginal);
+        Class->HookVTable("ServerCheat", ServerCheatHook);
     }
 };

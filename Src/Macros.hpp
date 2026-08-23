@@ -25,6 +25,12 @@ public: \
         return Ret; \
     }
 
+#define DEFAULT_OBJ(Name) \
+    static Name* DefaultObj() \
+    { \
+        return (Name*)StaticClass()->DefaultObject; \
+    }
+
 #define STATIC_STRUCT(Type, Name) \
     static UStruct* StaticStruct() \
     { \
@@ -41,6 +47,8 @@ public: \
         memset(Ret, 0, Size()); \
         return (Type*)Ret; \
     }
+
+
 
 #define OFFSET_PROP(Type, Name) \
 private: \
@@ -106,3 +114,4 @@ public: \
 
 
 #define UFUNC(Name) static auto Func = Class->GetFunc(Name)
+#define UFUNC_STATIC(Name) static auto Func = StaticClass()->GetFunc(Name)

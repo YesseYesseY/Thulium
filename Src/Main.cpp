@@ -136,6 +136,13 @@ void Init()
         if (Scanner.IsValid())
             Hook::Function(Scanner.ScanForOpCode(0xE8).RelativeOffset(1).Get(), Hook::ReturnHook);
     }
+
+    // STAT_ParticleSystemComponent_InitParticles crash
+    {
+        auto Scanner = Memcury::Scanner::FindStringRef(L"STAT_ParticleSystemComponent_InitParticles");
+        if (Scanner.IsValid())
+            Hook::Function(Scanner.ScanFor({ 0x4C, 0x8B, 0xDC }, false).Get(), Hook::ReturnHook);
+    }
 #endif
 }
 
@@ -163,6 +170,12 @@ DWORD MainThread(void*)
     UKismetSystemLibrary::ExecuteConsoleCommand(L"log LogFort VeryVerbose");
 
     UKismetSystemLibrary::ExecuteConsoleCommand(MapString);
+
+#if CLIENT
+    while (!(GetAsyncKeyState(VK_F5) & 1)) Sleep(100);
+    auto Controller = UWorld::GetWorld()->OwningGameInstance->LocalPlayers[0]->PlayerController;
+    Controller->CheatManager = UGameplayStatics::SpawnObject<UCheatManager>(Controller);
+#endif
 
     return 0;
 }
