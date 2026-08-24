@@ -31,6 +31,15 @@ public: \
         return (Name*)StaticClass()->DefaultObject; \
     }
 
+#define CLASS_GET(Name) \
+    static Name* Get() \
+    { \
+        Name* Ret = UObject::FindFirstObjectOfClass<Name>(); \
+        return Ret; \
+    }
+
+
+
 #define STATIC_STRUCT(Type, Name) \
     static UStruct* StaticStruct() \
     { \

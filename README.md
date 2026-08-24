@@ -11,6 +11,8 @@ Fortnite GameServer
    - [x] Equipping Items
    - [ ] Picking Up Items
    - [ ] Dropping Items
+ - Events
+   - Rocket (4.5)
 
 # Supported Builds
  - 3.5-CL-4008490

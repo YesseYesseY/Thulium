@@ -2,6 +2,7 @@
 #include "FortPlayerControllerPvP.hpp"
 #include "FortGameModeAthena.hpp"
 #include "FortKismetLibrary.hpp"
+#include "BP_GeodeScripting_C.hpp"
 
 class AFortPlayerControllerAthena : public AFortPlayerControllerPvP
 {
@@ -40,7 +41,16 @@ public:
     {
         auto Msg = FMsg.ToWString();
 
-        if (Msg == L"devloadout")
+        if (Msg.starts_with(L"server "))
+        {
+            UKismetSystemLibrary::ExecuteConsoleCommand(Msg.substr(7).c_str());
+        }
+        else if (Msg == L"dumpobjects")
+        {
+            UObject::Objects->Dump();
+            MsgBox("Dumped Objects");
+        }
+        else if (Msg == L"devloadout")
         {
             static std::vector<std::pair<UFortItemDefinition*, int32>> Items = {
                 { UFortKismetLibrary::K2_GetResourceItemDefinition(EFortResourceType::Wood), 999 },
@@ -63,6 +73,13 @@ public:
             auto Inventory = This->WorldInventory;
             for (auto& thing : Items)
                 Inventory->AddItem(thing.first, thing.second);
+        }
+        else if (Msg == L"startevent")
+        {
+            if (GameVersion != 4.5f)
+                return;
+
+            ABP_GeodeScripting_C::Get()->TestLaunch(60.0f);
         }
     }
 
