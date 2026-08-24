@@ -1,6 +1,7 @@
 #include "Object.hpp"
 #include "Class.hpp"
 #include "ObjectArray.hpp"
+#include "../FortniteGame/FortPlayerPawnAthena.hpp"
 
 void UObject::Init()
 {
@@ -44,9 +45,30 @@ void UObject::Init()
     }
 }
 
-void UObject::ProcessEvent(UFunction* function, void* args)
+void UObject::PostInit()
 {
-    _ProcessEvent(this, function, args);
+    // GetInterfaceAddress
+    {
+        auto Addr1 = Memcury::Scanner::FindStringRef(L"AFortPawn::GetInventoryOwnerInterface").ScanFor({ 0x40, 0x53 }, false).GetAs<void*>();
+        if (!Addr1)
+        {
+            MsgBox("Failed to find AFortPawn::GetInventoryOwnerInterface");
+            return;
+        }
+
+        auto AthenaVTable = AFortPlayerPawnAthena::StaticClass()->DefaultObject->VTable;
+        auto PawnVTable = AFortPawn::StaticClass()->DefaultObject->VTable;
+
+        int Idx = 0;
+        for (; Idx < 1000; Idx++)
+        {
+            if (PawnVTable[Idx] == Addr1)
+                break;
+        }
+
+        auto Addr2 = Memcury::Scanner(AthenaVTable[Idx]).ScanForOpCode(0xE9).RelativeOffset(1).Get();
+        _GetInterfaceAddress = decltype(_GetInterfaceAddress)(Addr2);
+    }
 }
 
 std::string UObject::GetName() const

@@ -16,20 +16,27 @@ class AFortInventory : public AActor
     }
 
 public:
-    void Update()
+    void Update(FFortItemEntry* ItemEntry = nullptr)
     {
         HandleInventoryLocalUpdate();
-        Inventory.MarkArrayDirty();
+        if (ItemEntry)
+            Inventory.MarkItemDirty(ItemEntry);
+        else
+            Inventory.MarkArrayDirty();
     }
 
-    FFortItemEntry* FindItemEntry(const FGuid& ItemGuid)
+    FFortItemEntry* FindItemEntry(const FGuid& ItemGuid, int32* Idx = nullptr)
     {
         auto& Items = Inventory.ReplicatedEntries;
         for (int i = 0; i < Items.Num(); i++)
         {
             auto& Entry = Items.Get(i, FFortItemEntry::Size());
             if (Entry.ItemGuid == ItemGuid)
+            {
+                if (Idx)
+                    *Idx = i;
                 return &Entry;
+            }
         }
 
         return nullptr;
@@ -41,4 +48,5 @@ public:
     }
 
     void AddItem(UFortItemDefinition* ItemDef, int32 Count, bool ShouldUpdate = true);
+    bool RemoveItem(const FGuid& ItemGuid, int32 Count);
 };

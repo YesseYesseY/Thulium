@@ -49,7 +49,8 @@ class UObject
 {
 private:
     static inline void* (*_StaticFindObject)(void*, void*, const wchar_t*, bool) = nullptr;
-    static inline void (*_ProcessEvent)(void*, void*, void*) = nullptr;
+    static inline void (*_ProcessEvent)(UObject*, UFunction*, void*) = nullptr;
+    static inline void** (*_GetInterfaceAddress)(UObject*, UClass*) = nullptr;
 
 public:
     static inline class FUObjectArray* Objects = nullptr;
@@ -62,7 +63,20 @@ public:
     FName Name;
     UObject* Outer;
 
+public:
+    void** GetInterfaceAddress(UClass* InterfaceClass)
+    {
+        return _GetInterfaceAddress(this, InterfaceClass);
+    }
+
+    void ProcessEvent(UFunction* function, void* args = nullptr)
+    {
+        _ProcessEvent(this, function, args);
+    }
+
+public:
     static void Init();
+    static void PostInit();
 
     template <typename T = UObject>
     static T* FindObject(const wchar_t* Name)
@@ -94,7 +108,14 @@ public:
         return (UEnum*)_StaticFindObject(UEnumClass, nullptr, Name, false);
     }
 
-    void ProcessEvent(UFunction* function, void* args = nullptr);
+    static UObject* FindFirstObjectOfClass(UClass* Class);
+
+    template <typename T>
+    static inline T* FindFirstObjectOfClass()
+    {
+        return (T*)FindFirstObjectOfClass(T::StaticClass());
+    }
+
     std::string GetName() const;
     std::wstring GetNameW() const;
     std::string GetPathName() const;
@@ -110,13 +131,5 @@ public:
     inline bool HasAnyFlags(EObjectFlags OtherFlags) const
     {
         return (Flags & OtherFlags) != EObjectFlags::NoFlags;
-    }
-
-    static UObject* FindFirstObjectOfClass(UClass* Class);
-
-    template <typename T>
-    static inline T* FindFirstObjectOfClass()
-    {
-        return (T*)FindFirstObjectOfClass(T::StaticClass());
     }
 };

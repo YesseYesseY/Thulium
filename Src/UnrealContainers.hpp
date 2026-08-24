@@ -323,6 +323,12 @@
 			return true;
 		}
 
+        template <typename T>
+        inline bool Remove(int32 Index)
+        {
+            return Remove(Index, T::Size());
+        }
+
 		inline void Clear()
 		{
 			NumElements = 0;

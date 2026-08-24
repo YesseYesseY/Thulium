@@ -1,4 +1,5 @@
 #pragma once
+#include "FastArraySerializerItem.hpp"
 
 struct FFastArraySerializer
 {
@@ -25,5 +26,18 @@ struct FFastArraySerializer
 
         CachedNumItems = -1;
         CachedNumItemsToConsiderForWriting = -1;
+    }
+
+    void MarkItemDirty(FFastArraySerializerItem* Item)
+    {
+        if (Item->ReplicationID == -1)
+        {
+            Item->ReplicationID = ++IDCounter;
+            if (IDCounter == -1)
+                IDCounter++;
+        }
+
+        Item->ReplicationKey++;
+        MarkArrayDirty();
     }
 };

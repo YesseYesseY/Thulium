@@ -7,7 +7,7 @@ Fortnite GameServer
  - Abilities
  - Inventory
    - [x] Giving Items
-   - [ ] Removing Items
+   - [x] Removing Items
    - [x] Equipping Items
    - [ ] Picking Up Items
    - [ ] Dropping Items

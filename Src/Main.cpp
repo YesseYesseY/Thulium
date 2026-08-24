@@ -10,6 +10,7 @@
 #include "FortniteGame/FortGameModeAthena.hpp"
 #include "FortniteGame/FortPlayerState.hpp"
 #include "FortniteGame/FortPlayerControllerAthena.hpp"
+#include "FortniteGame/FortInventoryOwnerInterface.hpp"
 
 #include "OnlineSubsystemUtils/OnlineBeaconHost.hpp"
 
@@ -53,6 +54,7 @@ void Init()
     UBoolProperty::Init();
     UFunction::Init();
     UEnum::Init();
+    UObject::PostInit();
 
     // GameVersion/EngineVersion
     {
@@ -73,6 +75,7 @@ void Init()
     AFortGameModeAthena::Init();
     AFortPlayerControllerAthena::Init();
     AFortPlayerState::Init();
+    UFortInventoryOwnerInterface::Init();
 
     AOnlineBeacon::Init();
     AOnlineBeaconHost::Init();

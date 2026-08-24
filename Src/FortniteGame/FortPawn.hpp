@@ -1,6 +1,7 @@
 #pragma once
 #include "../Engine/Character.hpp"
 #include "FortWeapon.hpp"
+#include "FortItemEntry.hpp"
 #include "FortWeaponItemDefinition.hpp"
 
 class AFortPawn : public ACharacter
