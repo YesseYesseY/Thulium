@@ -11,6 +11,12 @@ Fortnite GameServer
    - [x] Equipping Items
    - [ ] Picking Up Items
    - [ ] Dropping Items
+ - Building
+   - [x] Placing Builds
+   - [ ] Editing Builds
+   - [ ] Repair Builds
+   - [ ] Placing Traps
+   - [ ] Destroy Overlapping Props
  - Events
    - Rocket (4.5)
 

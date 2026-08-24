@@ -66,12 +66,11 @@ public:
         return _SpawnActor(this, ActorClass, translivesmatter, Params);
     }
 
-    AActor* SpawnActor(UClass* ActorClass, FVector Translation = {})
+    template <typename T = AActor>
+    T* SpawnActor(UClass* ActorClass, FVector Translation = {}, FRotator Rotation = {})
     {
-        FTransform translivesmatter = {};
-        translivesmatter.Translation = Translation;
-        translivesmatter.Scale3D = { 1, 1, 1 };
-        return SpawnActor(ActorClass, translivesmatter);
+        FTransform translivesmatter = FTransform(Translation, Rotation, { 1, 1, 1 });
+        return (T*)SpawnActor(ActorClass, translivesmatter);
     }
 
     template <typename T>
@@ -81,9 +80,9 @@ public:
     }
 
     template <typename T>
-    T* SpawnActor(FVector Translation = {})
+    T* SpawnActor(FVector Translation = {}, FRotator Rotation = {})
     {
-        return (T*)SpawnActor(T::StaticClass(), Translation);
+        return (T*)SpawnActor(T::StaticClass(), Translation, Rotation);
     }
 
 public:

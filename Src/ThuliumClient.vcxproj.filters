@@ -48,6 +48,9 @@
     <ClCompile Include="CoreUObject\Struct.cpp">
       <Filter>CoreUObject</Filter>
     </ClCompile>
+    <ClCompile Include="CoreUObject\Transform.cpp">
+      <Filter>CoreUObject</Filter>
+    </ClCompile>
     <ClCompile Include="Engine\Engine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>

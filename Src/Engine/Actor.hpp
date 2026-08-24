@@ -20,6 +20,12 @@ class AActor : public UObject
         ProcessEvent(Func);
     }
 
+    void K2_DestroyActor()
+    {
+        UFUNC("K2_DestroyActor");
+        ProcessEvent(Func);
+    }
+
     AActor* GetOwner()
     {
         UFUNC("GetOwner");

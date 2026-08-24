@@ -3,6 +3,9 @@
 #include "FortGameModeAthena.hpp"
 #include "FortKismetLibrary.hpp"
 #include "BP_GeodeScripting_C.hpp"
+#include "BuildingClassData.hpp"
+#include "BuildingSMActor.hpp"
+#include "BuildingStructuralSupportSystem.hpp"
 
 class AFortPlayerControllerAthena : public AFortPlayerControllerPvP
 {
@@ -83,6 +86,15 @@ public:
         }
     }
 
+    static void ServerCreateBuildingActorHook(AFortPlayerControllerAthena* This, const FBuildingClassData& BuildingClassData, const FVector& BuildLoc, const FRotator& BuildRot, bool bMirrored)
+    {
+        auto BuildClass = BuildingClassData.BuildingClass;
+
+        auto Build = UWorld::GetWorld()->SpawnActor<ABuildingSMActor>(BuildingClassData.BuildingClass, BuildLoc, BuildRot);
+        Build->SetMirrored(bMirrored);
+        Build->InitializeKismetSpawnedBuildingActor(Build, This);
+    }
+
 public:
     static void Init()
     {
@@ -91,5 +103,6 @@ public:
         Class->HookVTable("ServerExecuteInventoryItem", ServerExecuteInventoryItemHook);
         Class->HookVTable("ServerLoadingScreenDropped", ServerLoadingScreenDroppedHook, &ServerLoadingScreenDroppedOriginal);
         Class->HookVTable("ServerCheat", ServerCheatHook);
+        Class->HookVTable("ServerCreateBuildingActor", ServerCreateBuildingActorHook);
     }
 };

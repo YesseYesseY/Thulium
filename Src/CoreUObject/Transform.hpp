@@ -10,4 +10,10 @@ struct alignas(16) FTransform
     char pad1[4];
     FVector Scale3D;
     char pad2[4];
+
+    FTransform()
+    {
+    }
+
+    FTransform(const FVector& Location, const FRotator& Rotation, const FVector& Scale);
 };
