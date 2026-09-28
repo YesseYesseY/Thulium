@@ -90,9 +90,20 @@ public:
     {
         auto BuildClass = BuildingClassData.BuildingClass;
 
-        auto Build = UWorld::GetWorld()->SpawnActor<ABuildingSMActor>(BuildingClassData.BuildingClass, BuildLoc, BuildRot);
-        Build->SetMirrored(bMirrored);
-        Build->InitializeKismetSpawnedBuildingActor(Build, This);
+        static auto SupportSystem = UBuildingStructuralSupportSystem::Get();
+        TArray<ABuildingActor*> ExistingBuildings;
+
+        if (SupportSystem->CanPlaceBuildingClass(BuildClass, BuildLoc, BuildRot, bMirrored, &ExistingBuildings))
+        {
+            auto Build = UWorld::GetWorld()->SpawnActor<ABuildingSMActor>(BuildingClassData.BuildingClass, BuildLoc, BuildRot);
+            Build->SetMirrored(bMirrored);
+            Build->InitializeKismetSpawnedBuildingActor(Build, This);
+
+            for (auto Actor : ExistingBuildings)
+                Actor->K2_DestroyActor();
+
+            ExistingBuildings.Free();
+        }
     }
 
 public:

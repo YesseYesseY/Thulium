@@ -82,6 +82,8 @@ void Init()
 
     UAbilitySystemComponent::Init();
 
+    UBuildingStructuralSupportSystem::Init();
+
     // GIsClient/GIsServer
     {
         // Oddities i've found with GIsClient+Server
