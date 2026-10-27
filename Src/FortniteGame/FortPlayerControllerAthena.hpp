@@ -106,6 +106,11 @@ public:
         }
     }
 
+    static void ServerRepairBuildingActorHook(AFortPlayerControllerAthena* This, ABuildingSMActor* BuildingActorToRepair)
+    {
+        BuildingActorToRepair->RepairBuilding(This, 10);
+    }
+
 public:
     static void Init()
     {
@@ -115,5 +120,6 @@ public:
         Class->HookVTable("ServerLoadingScreenDropped", ServerLoadingScreenDroppedHook, &ServerLoadingScreenDroppedOriginal);
         Class->HookVTable("ServerCheat", ServerCheatHook);
         Class->HookVTable("ServerCreateBuildingActor", ServerCreateBuildingActorHook);
+        Class->HookVTable("ServerRepairBuildingActor", ServerRepairBuildingActorHook);
     }
 };
