@@ -42,6 +42,23 @@ public:
         return nullptr;
     }
 
+    FFortItemEntry* FindItemEntry(UFortItemDefinition* ItemDef, int32* Idx = nullptr)
+    {
+        auto& Items = Inventory.ReplicatedEntries;
+        for (int i = 0; i < Items.Num(); i++)
+        {
+            auto& Entry = Items.Get(i, FFortItemEntry::Size());
+            if (Entry.ItemDefinition == ItemDef)
+            {
+                if (Idx)
+                    *Idx = i;
+                return &Entry;
+            }
+        }
+
+        return nullptr;
+    }
+
     inline int32 Num() const
     {
         return Inventory.ReplicatedEntries.Num();

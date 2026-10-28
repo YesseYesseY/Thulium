@@ -7,6 +7,7 @@
 #include "BuildingSMActor.hpp"
 #include "BuildingStructuralSupportSystem.hpp"
 #include "FortDecoTool_ContextTrap.hpp"
+#include "FortWeap_EditingTool.hpp"
 
 class AFortPlayerControllerAthena : public AFortPlayerControllerPvP
 {
@@ -128,6 +129,32 @@ public:
         BuildingActorToRepair->RepairBuilding(This, 10);
     }
 
+    static void ServerBeginEditingBuildingActorHook(AFortPlayerControllerAthena* This, ABuildingSMActor* BuildingActorToEdit)
+    {
+        static auto EditToolItemDef = UObject::FindObject<UFortItemDefinition>(L"/Game/Items/Weapons/BuildingTools/EditTool.EditTool");
+        auto ItemEntry = This->WorldInventory->FindItemEntry(EditToolItemDef);
+        if (!ItemEntry)
+            return;
+
+        auto EditTool = (AFortWeap_EditingTool*)This->GetPawn<AFortPawn>()->EquipItemEntry(ItemEntry);
+        EditTool->EditActor = BuildingActorToEdit;
+        EditTool->OnRep_EditActor();
+
+        BuildingActorToEdit->EditingPlayer = This->GetPlayerState<AFortPlayerStateZone>();
+        BuildingActorToEdit->OnRep_EditingPlayer();
+    }
+
+    static void ServerEndEditingBuildingActorHook(AFortPlayerControllerAthena* This, ABuildingSMActor* BuildingActorToStopEditing)
+    {
+        BuildingActorToStopEditing->EditingPlayer = nullptr;
+        BuildingActorToStopEditing->OnRep_EditingPlayer();
+    }
+
+    static void ServerEditBuildingActorHook(AFortPlayerControllerAthena* This, ABuildingSMActor* BuildingActorToEdit, UClass* NewBuildingClass, int32 RotationIterations, bool bMirrored)
+    {
+        BuildingActorToEdit->ReplaceBuildingActor(NewBuildingClass, RotationIterations, bMirrored, This);
+    }
+
 public:
     static void Init()
     {
@@ -138,5 +165,8 @@ public:
         Class->HookVTable("ServerCheat", ServerCheatHook);
         Class->HookVTable("ServerCreateBuildingActor", ServerCreateBuildingActorHook);
         Class->HookVTable("ServerRepairBuildingActor", ServerRepairBuildingActorHook);
+        Class->HookVTable("ServerBeginEditingBuildingActor", ServerBeginEditingBuildingActorHook);
+        Class->HookVTable("ServerEndEditingBuildingActor", ServerEndEditingBuildingActorHook);
+        Class->HookVTable("ServerEditBuildingActor", ServerEditBuildingActorHook);
     }
 };

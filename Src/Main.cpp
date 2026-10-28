@@ -84,6 +84,8 @@ void Init()
 
     UBuildingStructuralSupportSystem::Init();
 
+    ABuildingSMActor::Init();
+
     // GIsClient/GIsServer
     {
         // Oddities i've found with GIsClient+Server
