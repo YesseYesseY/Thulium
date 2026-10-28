@@ -6,6 +6,7 @@
 #include "BuildingClassData.hpp"
 #include "BuildingSMActor.hpp"
 #include "BuildingStructuralSupportSystem.hpp"
+#include "FortDecoTool_ContextTrap.hpp"
 
 class AFortPlayerControllerAthena : public AFortPlayerControllerPvP
 {
@@ -19,8 +20,21 @@ public:
 
     static void ServerExecuteInventoryItemHook(AFortPlayerControllerAthena* This, const FGuid& ItemGuid)
     {
-        if (auto ItemEntry = This->WorldInventory->FindItemEntry(ItemGuid))
-            This->GetPawn<AFortPawn>()->EquipItemEntry(ItemEntry);
+        auto ItemEntry = This->WorldInventory->FindItemEntry(ItemGuid);
+        if (!ItemEntry)
+            return;
+
+        auto Weapon = This->GetPawn<AFortPawn>()->EquipItemEntry(ItemEntry);
+        if (Weapon->IsA<AFortDecoTool>())
+        {
+            auto DecoTool = (AFortDecoTool*)Weapon;
+            // MsgBox("{}", DecoTool->ItemDefinition->GetFullName());
+            DecoTool->ItemDefinition = ItemEntry->ItemDefinition;
+            DecoTool->OnRep_ItemDefinition();
+
+            if (Weapon->IsA<AFortDecoTool_ContextTrap>())
+                ((AFortDecoTool_ContextTrap*)Weapon)->ContextTrapItemDefinition = ItemEntry->ItemDefinition;
+        }
     }
 
     static inline void (*ServerLoadingScreenDroppedOriginal)(AFortPlayerControllerAthena*) = nullptr;
@@ -71,6 +85,9 @@ public:
                 { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Weapons/WID_Sniper_BoltAction_Scope_Athena_SR_Ore_T03.WID_Sniper_BoltAction_Scope_Athena_SR_Ore_T03"), 1 },
                 { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Consumables/KnockGrenade/Athena_KnockGrenade.Athena_KnockGrenade"), 1 },
                 { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Consumables/Shields/Athena_Shields.Athena_Shields"), 3 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Traps/TID_ContextTrap_Athena.TID_ContextTrap_Athena"), 999 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Traps/TID_Floor_Player_Campfire_Athena.TID_Floor_Player_Campfire_Athena"), 999 },
+                { UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Traps/TID_Floor_Player_Launch_Pad_Athena.TID_Floor_Player_Launch_Pad_Athena"), 999 },
             };
 
             auto Inventory = This->WorldInventory;
