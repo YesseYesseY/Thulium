@@ -19,6 +19,10 @@ Fortnite GameServer
    - [x] Destroy Overlapping Props
  - Events
    - Rocket (4.5)
+ - UE Console
+   - [x] Auto Complete
+   - [x] Server Commands
+   - [ ] Client Commands
 
 # Supported Builds
  - 3.5-CL-4008490

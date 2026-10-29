@@ -1,5 +1,6 @@
 #include "CoreUObject/Transform.hpp"
 #include "CoreUObject/Guid.hpp"
+#include "CoreUObject/Color.hpp"
 
 #include "CoreUObject/Name.hpp"
 #include "CoreUObject/Object.hpp"

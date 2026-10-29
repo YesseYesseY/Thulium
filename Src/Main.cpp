@@ -66,6 +66,10 @@ void Init()
             EngineVersion = 4.261f;
     }
 
+#if CLIENT
+    UConsole::Init();
+#endif
+
 #if SERVER
     UEngine::Init();
     UWorld::Init();
@@ -162,6 +166,7 @@ DWORD MainThread(void*)
 #if CLIENT
     auto Viewport = UEngine::GetEngine()->GameViewport;
     Viewport->ViewportConsole = UGameplayStatics::SpawnObject<UConsole>(Viewport);
+    Viewport->ViewportConsole->BuildRuntimeAutoCompleteList();
 #endif
 
     // UObject::Objects->Dump();

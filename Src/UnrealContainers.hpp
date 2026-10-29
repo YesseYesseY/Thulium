@@ -308,6 +308,24 @@
             Add(Element, T::Size());
         }
 
+		inline void CopyFrom(const TArray& Other, int32 ElemSize = ElementSize)
+		{
+			if (this == &Other || Other.NumElements == 0)
+				return;
+
+			NumElements = Other.NumElements;
+
+			if (MaxElements >= Other.NumElements)
+			{
+				memcpy(Data, Other.Data, Other.NumElements);
+				return;
+			}
+
+			Data = static_cast<ArrayElementType*>(FMemory::Realloc(Data, Other.NumElements * ElemSize, ElementAlign));
+			MaxElements = Other.NumElements;
+			memcpy(Data, Other.Data, Other.NumElements * ElemSize);
+		}
+
 		inline bool Remove(int32 Index, int32 ElemSize = ElementSize)
 		{
 			if (!IsValidIndex(Index))
@@ -412,6 +430,23 @@
 
 			return L"";
 		}
+
+        inline FString ToLower() const
+        {
+            FString Ret;
+            Ret.CopyFrom(*this);
+            for (int32 i = 0; i < Ret.Len(); i++)
+            {
+                auto Char = Ret[i];
+                if (Char >= L'A' && Char <= L'Z')
+                    Ret[i] = Char + 32;
+            }
+
+            return Ret;
+        }
+
+	public:
+		inline int32 Len() const { return NumElements ? NumElements - 1 : 0; }
 
 	public:
 		inline       wchar_t* CStr()       { return Data; }
