@@ -39,10 +39,16 @@
     <ClCompile Include="CoreUObject\Class.cpp">
       <Filter>CoreUObject</Filter>
     </ClCompile>
+    <ClCompile Include="CoreUObject\Function.cpp">
+      <Filter>CoreUObject</Filter>
+    </ClCompile>
     <ClCompile Include="CoreUObject\Name.cpp">
       <Filter>CoreUObject</Filter>
     </ClCompile>
     <ClCompile Include="CoreUObject\Object.cpp">
+      <Filter>CoreUObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreUObject\Property.cpp">
       <Filter>CoreUObject</Filter>
     </ClCompile>
     <ClCompile Include="CoreUObject\Struct.cpp">

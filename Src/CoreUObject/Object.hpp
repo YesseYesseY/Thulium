@@ -125,7 +125,19 @@ public:
     template <typename T>
     bool IsA() const
     {
+        if (!this)
+            return false;
+
         return IsA(T::StaticClass());
+    }
+
+    template <typename T>
+    T* Cast() const
+    {
+        if (!this)
+            return nullptr;
+
+        return IsA(T::StaticClass()) ? (T*)this : nullptr;
     }
 
     inline bool HasAnyFlags(EObjectFlags OtherFlags) const

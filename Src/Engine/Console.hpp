@@ -1,5 +1,6 @@
 #pragma once
 #include "ConsoleSettings.hpp"
+#include "LevelScriptActor.hpp"
 
 struct FAutoCompleteNode
 {
@@ -38,6 +39,52 @@ class UConsole : public UObject
                 FAutoCompleteCommand ACC;
                 ACC.Command = ManList[Idx].Command;
                 ACC.Desc = ManList[Idx].Desc;
+                ACC.Color = CommandColor;
+                AutoCompleteList.Add(ACC);
+            }
+        }
+
+        // exec functions
+        for (int32 i = 0; i < UObject::Objects->Num(); i++)
+        {
+            auto Object = UObject::Objects->Get(i);
+            if (!Object || !Object->IsA<UFunction>())
+                continue;
+
+            auto Func = (UFunction*)Object;
+            auto FuncOuter = Func->Outer->Cast<UClass>();
+            auto FuncSuperFunc = Func->Super->Cast<UFunction>();
+
+            if (Func->HasAnyFunctionFlags(EFunctionFlags::Exec) && (FuncSuperFunc == nullptr || FuncOuter))
+            {
+                FAutoCompleteCommand ACC;
+
+                auto FuncName = Func->GetNameW();
+                for (int32 i = 0; i < FuncName.size(); i++)
+                {
+                    if (FuncName[i] == L' ')
+                    {
+                        FuncName = L'"' + FuncName + L'"';
+                        break;
+                    }
+                }
+
+                std::wstring Desc = L"";
+
+                static auto FunctionClass = UFunction::StaticClass();
+                for (auto Child = Func->Children; Child; Child = Child->Next)
+                {
+                    if (!Child->IsA(FunctionClass))
+                    {
+                        auto Prop = (UProperty*)Child;
+
+                        if ((Prop->PropertyFlags & EPropertyFlags::Parm) != EPropertyFlags::None)
+                            Desc += Prop->GetNameW() + L'[' + Prop->GetCPPTypeW() + L"] ";
+                    }
+                }
+
+                ACC.Command = FuncName;
+                ACC.Desc = Desc;
                 ACC.Color = CommandColor;
                 AutoCompleteList.Add(ACC);
             }

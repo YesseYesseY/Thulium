@@ -58,8 +58,10 @@
     <ClCompile Include="..\minhook\src\hook.c" />
     <ClCompile Include="..\minhook\src\trampoline.c" />
     <ClCompile Include="CoreUObject\Class.cpp" />
+    <ClCompile Include="CoreUObject\Function.cpp" />
     <ClCompile Include="CoreUObject\Name.cpp" />
     <ClCompile Include="CoreUObject\Object.cpp" />
+    <ClCompile Include="CoreUObject\Property.cpp" />
     <ClCompile Include="CoreUObject\Struct.cpp" />
     <ClCompile Include="CoreUObject\Transform.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />

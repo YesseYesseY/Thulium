@@ -410,6 +410,15 @@
 			MaxElements = NullTerminatedLength;
 		}
 
+        FString(const std::wstring& Str)
+        {
+            int32 ArrSize = Str.size() + 1;
+            NumElements = ArrSize;
+            MaxElements = ArrSize;
+            Data = static_cast<wchar_t*>(FMemory::Realloc(Data, MaxElements * ElementSize, 0));
+			memcpy(Data, Str.c_str(), Str.size() * ElementSize);
+        }
+
 	public:
 		inline std::string ToString() const
 		{
