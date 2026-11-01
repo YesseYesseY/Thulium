@@ -19,6 +19,43 @@ struct FAutoCompleteNode
     }
 };
 
+enum class EConsoleVariableFlags : uint32
+{
+    Default                  = 0x0,
+    Cheat                    = 0x1,
+    ReadOnly                 = 0x4,
+    Unregistered             = 0x8,
+    CreatedFromIni           = 0x10,
+    RenderThreadSafe         = 0x20,
+    Scalability              = 0x40,
+    ScalabilityGroup         = 0x80,
+    SetByMask                = 0xFF000000,
+    SetByConstructor         = 0x00000000,
+    SetByScalability         = 0x01000000,
+    SetByGameSetting         = 0x02000000,
+    SetByProjectSetting      = 0x03000000,
+    SetBySystemSettingsIni   = 0x04000000,
+    SetByDeviceProfile       = 0x05000000,
+    SetByConsoleVariablesIni = 0x06000000,
+    SetByCommandline         = 0x07000000,
+    SetByCode                = 0x08000000,
+    SetByConsole             = 0x09000000,
+};
+ENUM_CLASS_FLAGS(EConsoleVariableFlags);
+
+class FConsoleVariableBase
+{
+public:
+    void** VTable;
+    FString Help;
+    EConsoleVariableFlags Flags;
+
+    bool HasFlag(EConsoleVariableFlags Other)
+    {
+        return (Flags & Other) != EConsoleVariableFlags::Default;
+    }
+};
+
 class UConsole : public UObject
 {
     STATIC_CLASS(L"/Script/Engine.Console");
@@ -30,6 +67,8 @@ class UConsole : public UObject
     {
         auto ConsoleSettings = UConsoleSettings::DefaultObj();
         auto CommandColor = ConsoleSettings->AutoCompleteCommandColor;
+        auto CVarColor = ConsoleSettings->AutoCompleteCVarColor;
+        auto FadedColor = ConsoleSettings->AutoCompleteFadedColor;
 
         // manual list
         {
@@ -40,6 +79,30 @@ class UConsole : public UObject
                 ACC.Command = ManList[Idx].Command;
                 ACC.Desc = ManList[Idx].Desc;
                 ACC.Color = CommandColor;
+                AutoCompleteList.Add(ACC);
+            }
+        }
+
+        // console variables
+        {
+            auto IConsoleManager = *Memcury::Scanner::FindStringRef(L"gpucrashdebugging")
+                .ScanForOpCode(0xE8, 2)
+                .ScanForOpCode(0x8B)
+                .RelativeOffset(3)
+                .GetAs<uintptr_t*>();
+
+            auto ConsoleObjects = *(TMap<FString, FConsoleVariableBase*>*)(IConsoleManager + 8);
+
+            for (auto& thing : ConsoleObjects)
+            {
+                auto CVar = thing.Value();
+                if (CVar->HasFlag(EConsoleVariableFlags::Unregistered))
+                    continue;
+
+                FAutoCompleteCommand ACC;
+                ACC.Command = thing.Key();
+                // ACC.Desc = CVar->Help;
+                ACC.Color = CVar->HasFlag(EConsoleVariableFlags::ReadOnly) ? FadedColor : CVarColor;
                 AutoCompleteList.Add(ACC);
             }
         }
