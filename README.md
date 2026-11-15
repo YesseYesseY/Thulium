@@ -22,7 +22,16 @@ Fortnite GameServer
  - UE Console
    - [x] Auto Complete
    - [x] Server Commands
-   - [ ] Client Commands
+   - [x] Client Commands
+
+# Custom Commands
+## Client
+ - givemecheats - Spawns CheatManager
+
+## Server
+ - cheat devloadout - Gives you a lot of items
+ - cheat dumpobjects - Dump objects to objects.txt
+ - cheat startevent - Starts the event on valid builds
 
 # Supported Builds
  - 3.5-CL-4008490

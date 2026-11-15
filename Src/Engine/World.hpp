@@ -58,6 +58,7 @@ class UWorld : public UObject
 
 private:
     static inline AActor* (*_SpawnActor)(UWorld*, UClass*, FTransform&, FActorSpawnParameters&) = nullptr;
+    static inline bool (*_Exec)(UWorld*, int64, const wchar_t*, int64) = nullptr;
 
 public:
     AActor* SpawnActor(UClass* ActorClass, FTransform translivesmatter)
@@ -86,15 +87,31 @@ public:
     }
 
 public:
-    static UWorld* GetWorld();
-
-    static int64 GetNetMode(UWorld* This)
+    static int64 GetNetModeHook(UWorld* This)
     {
         return 1;
     }
 
+    static bool ExecHook(UWorld* This, int64 a2, const wchar_t* Cmd, int64 a4)
+    {
+        auto Msg = std::wstring(Cmd);
+
+        if (Msg == L"givemecheats")
+        {
+            auto Controller = This->OwningGameInstance->LocalPlayers[0]->PlayerController;
+            Controller->CheatManager = UGameplayStatics::SpawnObject<UCheatManager>(Controller);
+            return true;
+        }
+
+        return _Exec(This, a2, Cmd, a4);
+    }
+
+public:
+    static UWorld* GetWorld();
+
     static void Init()
     {
+#if SERVER
         // GetNetMode
         {
             auto Addr = Memcury::Scanner(UObject::FindFunction(L"/Script/Engine.KismetSystemLibrary:IsDedicatedServer")->Func)
@@ -107,7 +124,7 @@ public:
                 return;
             }
 
-            Hook::Function(Addr, GetNetMode);
+            Hook::Function(Addr, GetNetModeHook);
         }
 
         // SpawnActor
@@ -133,6 +150,26 @@ public:
 
             _SpawnActor = decltype(_SpawnActor)(Addr);
         }
+#else
+        // UWorld::Exec
+        {
+            auto Addr = Memcury::Scanner::FindStringRef(L"TOGGLECVAR: cvar '%s' was not found")
+                .ScanForOpCode(0xC3)
+                .ScanForOpCode(0xE8)
+                .RelativeOffset(1)
+                .Get();
+
+            if (Addr)
+            {
+                Hook::Function(Addr, ExecHook, &_Exec);
+            }
+            else
+            {
+                MsgBox("Failed to find UWorld::Exec, client commands will not work.");
+            }
+        }
+#endif
+
     }
 
 public:

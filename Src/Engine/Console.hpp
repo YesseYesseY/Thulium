@@ -156,10 +156,16 @@ class UConsole : public UObject
         // misc
         {
             FAutoCompleteCommand ACCs[] = {
-                { L"open 127.0.0.1", L"(opens connection to localhost)", CommandColor },
+                // server
                 { L"cheat devloadout", L"Gives you a lot of items", CommandColor },
                 { L"cheat dumpobjects", L"Dump objects to objects.txt", CommandColor },
-                { L"cheat startevent", L"Starts the event on event builds", CommandColor },
+                { L"cheat startevent", L"Starts the event on valid builds", CommandColor },
+
+                // client
+                { L"givemecheats", L"Spawns CheatManager", CommandColor },
+
+                // misc
+                { L"open 127.0.0.1", L"(opens connection to localhost)", CommandColor },
             };
 
             for (auto& ACC : ACCs)

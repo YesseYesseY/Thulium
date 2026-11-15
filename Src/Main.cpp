@@ -70,9 +70,10 @@ void Init()
     UConsole::Init();
 #endif
 
+    UWorld::Init();
+
 #if SERVER
     UEngine::Init();
-    UWorld::Init();
     UNetDriver::Init();
     UReplicationDriver::Init();
 
@@ -182,12 +183,6 @@ DWORD MainThread(void*)
     UKismetSystemLibrary::ExecuteConsoleCommand(L"log LogFort VeryVerbose");
 
     UKismetSystemLibrary::ExecuteConsoleCommand(MapString);
-
-#if CLIENT
-    while (!(GetAsyncKeyState(VK_F5) & 1)) Sleep(100);
-    auto Controller = UWorld::GetWorld()->OwningGameInstance->LocalPlayers[0]->PlayerController;
-    Controller->CheatManager = UGameplayStatics::SpawnObject<UCheatManager>(Controller);
-#endif
 
     return 0;
 }
