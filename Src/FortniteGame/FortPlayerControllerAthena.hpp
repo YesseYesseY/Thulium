@@ -8,6 +8,7 @@
 #include "BuildingStructuralSupportSystem.hpp"
 #include "FortDecoTool_ContextTrap.hpp"
 #include "FortWeap_EditingTool.hpp"
+#include "FortPickupAthena.hpp"
 
 class AFortPlayerControllerAthena : public AFortPlayerControllerPvP
 {
@@ -62,6 +63,13 @@ public:
         if (Msg.starts_with(L"server "))
         {
             UKismetSystemLibrary::ExecuteConsoleCommand(Msg.substr(7).c_str());
+        }
+        else if (Msg == L"pickuptest")
+        {
+            static auto TestItemDef = UObject::FindObject<UFortItemDefinition>(L"/Game/Athena/Items/Weapons/WID_Assault_AutoHigh_Athena_SR_Ore_T03.WID_Assault_AutoHigh_Athena_SR_Ore_T03");
+            auto TestPickup = AFortPickup::Spawn(This->Pawn->K2_GetActorLocation());
+            TestPickup->SetItemDef(TestItemDef, 1);
+            TestPickup->TossVelocity({ 0, 500.0f, 500.0f });
         }
         else if (Msg == L"dumpobjects")
         {
@@ -155,6 +163,24 @@ public:
         BuildingActorToEdit->ReplaceBuildingActor(NewBuildingClass, RotationIterations, bMirrored, This);
     }
 
+    static void ServerAttemptInventoryDropHook(AFortPlayerControllerAthena* This, const FGuid& ItemGuid, int32 Count)
+    {
+        auto ItemEntry = This->WorldInventory->FindItemEntry(ItemGuid);
+        if (!ItemEntry)
+            return;
+
+        UFortItemDefinition* ItemDef = ItemEntry->ItemDefinition;
+
+        if (This->WorldInventory->RemoveItem(ItemGuid, Count))
+        {
+            auto Pickup = AFortPickup::Spawn(This->Pawn->K2_GetActorLocation());
+            Pickup->SetItemDef(ItemDef, Count);
+
+            // TODO Inventory drops works like container drops. This will be scuffed until I implement that.
+            Pickup->TossVelocity({ 0, 500.0f, 500.0f });
+        }
+    }
+
 public:
     static void Init()
     {
@@ -168,5 +194,6 @@ public:
         Class->HookVTable("ServerBeginEditingBuildingActor", ServerBeginEditingBuildingActorHook);
         Class->HookVTable("ServerEndEditingBuildingActor", ServerEndEditingBuildingActorHook);
         Class->HookVTable("ServerEditBuildingActor", ServerEditBuildingActorHook);
+        Class->HookVTable("ServerAttemptInventoryDrop", ServerAttemptInventoryDropHook);
     }
 };

@@ -51,6 +51,9 @@
     <ClCompile Include="CoreUObject\Property.cpp">
       <Filter>CoreUObject</Filter>
     </ClCompile>
+    <ClCompile Include="CoreUObject\Rotator.cpp">
+      <Filter>CoreUObject</Filter>
+    </ClCompile>
     <ClCompile Include="CoreUObject\Struct.cpp">
       <Filter>CoreUObject</Filter>
     </ClCompile>
@@ -64,6 +67,9 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="FortniteGame\FortInventory.cpp">
+      <Filter>FortniteGame</Filter>
+    </ClCompile>
+    <ClCompile Include="FortniteGame\FortPickup.cpp">
       <Filter>FortniteGame</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />

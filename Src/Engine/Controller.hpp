@@ -10,6 +10,15 @@ class AController : public AActor
     CLASS_PROP(APlayerState*, PlayerState);
     CLASS_PROP(APawn*, Pawn);
 
+    FRotator GetControlRotation()
+    {
+        UFUNC("GetControlRotation");
+
+        FRotator Ret;
+        ProcessEvent(Func, &Ret);
+        return Ret;
+    }
+
 public:
     template <typename T>
     T* GetPlayerState()

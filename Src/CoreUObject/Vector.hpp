@@ -14,18 +14,23 @@ struct FVector
         return FVector(X - O.X, Y - O.Y, Z - O.Z);
     }
 
-    inline FVector operator+(const FVector& O)
+    inline FVector operator+(const FVector& A)
     {
-        return FVector(X + O.X, Y + O.Y, Z + O.Z);
+        return FVector(X + A.X, Y + A.Y, Z + A.Z);
     }
 
-    inline FVector operator*(const FVector& O)
+    inline FVector operator*(const FVector& A)
     {
-        return FVector(X * O.X, Y * O.Y, Z * O.Z);
+        return FVector(X * A.X, Y * A.Y, Z * A.Z);
     }
 
-    inline FVector operator/(const FVector& O)
+    inline FVector operator/(const FVector& A)
     {
-        return FVector(X / O.X, Y / O.Y, Z / O.Z);
+        return FVector(X / A.X, Y / A.Y, Z / A.Z);
+    }
+
+    inline FVector operator*(float A)
+    {
+        return FVector(X * A, Y * A, Z * A);
     }
 };

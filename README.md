@@ -10,7 +10,7 @@ Fortnite GameServer
    - [x] Removing Items
    - [x] Equipping Items
    - [ ] Picking Up Items
-   - [ ] Dropping Items
+   - [x] Dropping Items (Scuffed)
  - Building
    - [x] Placing Builds
    - [x] Editing Builds

@@ -160,6 +160,7 @@ class UConsole : public UObject
                 { L"cheat devloadout", L"Gives you a lot of items", CommandColor },
                 { L"cheat dumpobjects", L"Dump objects to objects.txt", CommandColor },
                 { L"cheat startevent", L"Starts the event on valid builds", CommandColor },
+                { L"cheat pickuptest", L"Pickup testing", CommandColor },
 
                 // client
                 { L"givemecheats", L"Spawns CheatManager", CommandColor },

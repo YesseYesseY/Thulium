@@ -62,11 +62,13 @@
     <ClCompile Include="CoreUObject\Name.cpp" />
     <ClCompile Include="CoreUObject\Object.cpp" />
     <ClCompile Include="CoreUObject\Property.cpp" />
+    <ClCompile Include="CoreUObject\Rotator.cpp" />
     <ClCompile Include="CoreUObject\Struct.cpp" />
     <ClCompile Include="CoreUObject\Transform.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\World.cpp" />
     <ClCompile Include="FortniteGame\FortInventory.cpp" />
+    <ClCompile Include="FortniteGame\FortPickup.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

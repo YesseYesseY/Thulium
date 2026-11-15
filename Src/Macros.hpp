@@ -75,6 +75,11 @@ public: \
     inline void _put_##Name(Type val) { static int32 offset = Class->GetProp(#Name)->Offset; *(Type*)(int64(this) + offset) = val; } \
     __declspec(property(get = _get_##Name, put = _put_##Name)) Type Name;
 
+#define CLASS_PROP_SAFE(Type, Name) \
+public: \
+    inline bool Name##_Exists() const { static void* Prop = Class->GetProp(#Name); return Prop != nullptr; } \
+    CLASS_PROP(Type, Name)
+
 #define CLASS_BIT(Name) \
 public: \
     inline bool _get_##Name() const { static int32 offset = -1; static uint8 fieldmask = 0; \
