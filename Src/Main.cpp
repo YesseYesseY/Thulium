@@ -1,5 +1,7 @@
 #include <format>
 #include <Windows.h>
+#include <xmmintrin.h>
+
 #include "Hook.hpp"
 #include "UnrealContainers.hpp"
 
@@ -76,6 +78,7 @@ void Init()
     UEngine::Init();
     UNetDriver::Init();
     UReplicationDriver::Init();
+    APlayerController::Init();
 
     AFortGameModeAthena::Init();
     AFortPlayerControllerAthena::Init();
@@ -90,6 +93,7 @@ void Init()
     UBuildingStructuralSupportSystem::Init();
 
     ABuildingSMActor::Init();
+    ABuildingContainer::Init();
 
     // GIsClient/GIsServer
     {

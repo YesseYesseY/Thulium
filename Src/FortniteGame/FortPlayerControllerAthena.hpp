@@ -71,6 +71,10 @@ public:
             TestPickup->SetItemDef(TestItemDef, 1);
             TestPickup->TossVelocity({ 0, 500.0f, 500.0f });
         }
+        else if (Msg == L"tilted")
+        {
+            This->Pawn->K2_TeleportTo({ 27657.0f, -65548.0f, 2820.0f });
+        }
         else if (Msg == L"dumpobjects")
         {
             UObject::Objects->Dump();

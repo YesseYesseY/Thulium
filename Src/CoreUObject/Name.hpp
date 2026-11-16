@@ -13,4 +13,6 @@ public:
     FString ToFString() const;
     std::string ToString() const;
     std::wstring ToWString() const;
+
+    inline bool operator==(const FName& A) const { return pad == A.pad; }
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include "../CoreUObject.hpp"
+#include "SceneComponent.hpp"
 
 class AActor : public UObject
 {
@@ -7,6 +8,7 @@ class AActor : public UObject
 
     CLASS_BIT(bReplicateMovement);
     CLASS_PROP(float, NetPriority);
+    CLASS_PROP(USceneComponent*, RootComponent);
 
     FTransform GetTransform()
     {
@@ -34,6 +36,15 @@ class AActor : public UObject
         UFUNC("K2_GetActorLocation");
 
         FVector Ret;
+        ProcessEvent(Func, &Ret);
+        return Ret;
+    }
+
+    FRotator K2_GetActorRotation()
+    {
+        UFUNC("K2_GetActorRotation");
+
+        FRotator Ret;
         ProcessEvent(Func, &Ret);
         return Ret;
     }
@@ -66,6 +77,19 @@ class AActor : public UObject
     {
         UFUNC("FlushNetDormancy");
         ProcessEvent(Func);
+    }
+
+    bool K2_TeleportTo(FVector DestLocation, FRotator DestRotation = { 0.0f, 0.0f, 0.0f })
+    {
+        UFUNC("K2_TeleportTo");
+
+        struct {
+            FVector DestLocation;
+            FRotator DestRotation;
+            bool Ret;
+        } Args { DestLocation, DestRotation };
+        ProcessEvent(Func, &Args);
+        return Args.Ret;
     }
 
     template <typename T>

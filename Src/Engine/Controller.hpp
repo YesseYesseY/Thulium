@@ -9,6 +9,7 @@ class AController : public AActor
 
     CLASS_PROP(APlayerState*, PlayerState);
     CLASS_PROP(APawn*, Pawn);
+    CLASS_PROP(FName, StateName);
 
     FRotator GetControlRotation()
     {

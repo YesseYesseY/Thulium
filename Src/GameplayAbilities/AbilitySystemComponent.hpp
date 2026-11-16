@@ -120,8 +120,7 @@ public:
 
             auto Vtable = StaticClass()->DefaultObject->VTable;
             auto Idx2 = *Memcury::Scanner(Vtable[Idx]).ScanForOpCode(0xFF).AbsoluteOffset(2).GetAs<int32*>() / 8;
-            // TODO Hook all AbilitySystemComponent
-            UObject::FindClass(L"/Script/FortniteGame.FortAbilitySystemComponentAthena")->HookVTable(Idx2, InternalServerTryActivateAbilityHook);
+            StaticClass()->HookAllVTables(Idx2, InternalServerTryActivateAbilityHook);
         }
     }
 };

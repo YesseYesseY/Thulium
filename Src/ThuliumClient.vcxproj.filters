@@ -66,6 +66,9 @@
     <ClCompile Include="Engine\World.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="FortniteGame\BuildingContainer.cpp">
+      <Filter>FortniteGame</Filter>
+    </ClCompile>
     <ClCompile Include="FortniteGame\FortInventory.cpp">
       <Filter>FortniteGame</Filter>
     </ClCompile>

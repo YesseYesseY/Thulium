@@ -15,6 +15,8 @@ class UClass : public UStruct
     void HookVTable(int32 Idx, void* Hook, void** Original = nullptr);
     void HookVTable(const std::string& Name, void* Hook, void** Original = nullptr);
 
+    void HookAllVTables(int32 Idx, void* Hook);
+
     template <typename T>
     void HookVTable(const std::string& Name, void* Hook, T* Original)
     {
