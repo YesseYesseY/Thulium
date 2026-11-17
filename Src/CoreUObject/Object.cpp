@@ -137,3 +137,46 @@ UObject* UObject::FindFirstObjectOfClass(UClass* Class)
 
     return nullptr;
 }
+
+UStruct* UObject::FindStructFast(const std::string& Name)
+{
+    static auto UScriptStructClass = FindClass(L"/Script/CoreUObject.ScriptStruct");
+
+    for (int32 i = 0; i < Objects->Num(); i++)
+    {
+        auto Object = Objects->Get(i);
+        if (!Object || !Object->IsA(UScriptStructClass))
+            continue;
+
+        if (Object->GetName() != Name)
+            continue;
+
+        return (UStruct*)Object;
+    }
+
+    return nullptr;
+}
+
+UClass* UObject::FindClassFast(const std::string& Name)
+{
+    static auto UClassClass = FindClass(L"/Script/CoreUObject.Class");
+
+    for (int32 i = 0; i < Objects->Num(); i++)
+    {
+        auto Object = Objects->Get(i);
+        if (!Object || !Object->IsA(UClassClass))
+            continue;
+
+        if (Object->GetName() != Name)
+            continue;
+
+        return (UClass*)Object;
+    }
+
+    return nullptr;
+}
+
+UObject* UObject::DefaultObjectWrapper(void* Obj)
+{
+    return ((UClass*)Obj)->DefaultObject;
+}

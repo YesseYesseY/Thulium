@@ -3,5 +3,5 @@
 
 class ACharacter : public APawn
 {
-    STATIC_CLASS(L"/Script/Engine.Character");
+    STATIC_CLASS(ACharacter);
 };

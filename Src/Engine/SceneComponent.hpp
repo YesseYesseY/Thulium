@@ -3,5 +3,5 @@
 
 class USceneComponent : public UActorComponent
 {
-    STATIC_CLASS(L"/Script/Engine.SceneComponent");
+    STATIC_CLASS(USceneComponent);
 };

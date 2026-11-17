@@ -2,7 +2,7 @@
 
 struct FPredictionKey
 {
-    STATIC_STRUCT(FPredictionKey, L"/Script/GameplayAbilities.PredictionKey");
+    STATIC_STRUCT(FPredictionKey);
 
     STRUCT_PROP(int16, Current);
 };

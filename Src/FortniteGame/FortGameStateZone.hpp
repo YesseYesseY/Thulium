@@ -3,5 +3,5 @@
 
 class AFortGameStateZone : public AFortGameState
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortGameStateZone");
+    STATIC_CLASS(AFortGameStateZone);
 };

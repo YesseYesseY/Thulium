@@ -5,7 +5,7 @@
 
 class AController : public AActor
 {
-    STATIC_CLASS(L"/Script/Engine.Controller");
+    STATIC_CLASS(AController);
 
     CLASS_PROP(APlayerState*, PlayerState);
     CLASS_PROP(APawn*, Pawn);

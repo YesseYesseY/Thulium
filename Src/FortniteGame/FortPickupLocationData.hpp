@@ -2,7 +2,7 @@
 
 struct FFortPickupLocationData
 {
-    STATIC_STRUCT(FFortPickupLocationData, L"/Script/FortniteGame.FortPickupLocationData");
+    STATIC_STRUCT(FFortPickupLocationData);
 
     STRUCT_PROP(FVector, LootInitialPosition);
 };

@@ -3,7 +3,7 @@
 
 class UBoolProperty : public UProperty
 {
-    STATIC_CLASS(L"/Script/CoreUObject.BoolProperty");
+    STATIC_CLASS(UBoolProperty);
 
     OFFSET_PROP(uint8, FieldMask);
 

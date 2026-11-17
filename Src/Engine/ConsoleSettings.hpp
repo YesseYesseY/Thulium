@@ -12,8 +12,7 @@ struct FAutoCompleteCommand
 
 class UConsoleSettings : public UObject
 {
-    STATIC_CLASS(L"/Script/EngineSettings.ConsoleSettings");
-    DEFAULT_OBJ(UConsoleSettings);
+    STATIC_CLASS(UConsoleSettings);
 
     CLASS_PROP(TArray<FAutoCompleteCommand>, ManualAutoCompleteList);
     CLASS_PROP(FColor, AutoCompleteCommandColor);

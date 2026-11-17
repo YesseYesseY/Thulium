@@ -4,7 +4,7 @@
 
 class ABuildingContainer : public ABuildingTimeOfDayLights
 {
-    STATIC_CLASS(L"/Script/FortniteGame.BuildingContainer");
+    STATIC_CLASS(ABuildingContainer);
 
     CLASS_PROP(float, LootTossConeHalfAngle_Athena);
     CLASS_PROP(float, LootTossSpeed_Athena);

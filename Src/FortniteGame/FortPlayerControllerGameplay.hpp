@@ -3,5 +3,5 @@
 
 class AFortPlayerControllerGameplay : public AFortPlayerController
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPlayerControllerGameplay");
+    STATIC_CLASS(AFortPlayerControllerGameplay);
 };

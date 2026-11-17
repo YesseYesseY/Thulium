@@ -3,5 +3,5 @@
 
 class AFortPickupAthena : public AFortPickup
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPickupAthena");
+    STATIC_CLASS(AFortPickupAthena);
 };

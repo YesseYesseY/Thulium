@@ -7,7 +7,7 @@
 
 class AFortGameModeAthena : public AFortGamePvPBase
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortGameModeAthena");
+    STATIC_CLASS(AFortGameModeAthena);
 
     CLASS_PROP(int32, WarmupRequiredPlayerCount);
 

@@ -3,5 +3,5 @@
 
 class APlayerState : public AInfo
 {
-    STATIC_CLASS(L"/Script/Engine.PlayerState");
+    STATIC_CLASS(APlayerState);
 };

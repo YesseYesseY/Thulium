@@ -108,6 +108,17 @@ public:
         return (UEnum*)_StaticFindObject(UEnumClass, nullptr, Name, false);
     }
 
+    std::string GetName() const;
+    std::wstring GetNameW() const;
+    std::string GetPathName() const;
+    std::string GetFullName() const;
+    bool IsA(UClass* Other) const;
+
+    static UStruct* FindStructFast(const std::string& Name);
+    static UClass* FindClassFast(const std::string& Name);
+
+    static UObject* DefaultObjectWrapper(void* Obj);
+
     static UObject* FindFirstObjectOfClass(UClass* Class);
 
     template <typename T>
@@ -115,12 +126,6 @@ public:
     {
         return (T*)FindFirstObjectOfClass(T::StaticClass());
     }
-
-    std::string GetName() const;
-    std::wstring GetNameW() const;
-    std::string GetPathName() const;
-    std::string GetFullName() const;
-    bool IsA(UClass* Other) const;
 
     template <typename T>
     bool IsA() const

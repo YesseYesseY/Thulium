@@ -5,8 +5,7 @@
 
 class UFortKismetLibrary : public UObject
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortKismetLibrary");
-    DEFAULT_OBJ(UFortKismetLibrary);
+    STATIC_CLASS(UFortKismetLibrary);
 
     static UFortResourceItemDefinition* K2_GetResourceItemDefinition(EFortResourceType ResourceType)
     {

@@ -4,7 +4,7 @@
 
 class UGameViewportClient : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.GameViewportClient");
+    STATIC_CLASS(UGameViewportClient);
 
     CLASS_PROP(UConsole*, ViewportConsole);
     CLASS_PROP(UWorld*, World);

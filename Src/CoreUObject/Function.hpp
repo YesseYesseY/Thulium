@@ -40,7 +40,7 @@ ENUM_CLASS_FLAGS(EFunctionFlags);
 
 class UFunction : public UStruct
 {
-    STATIC_CLASS(L"/Script/CoreUObject.Function");
+    STATIC_CLASS(UFunction);
 
     OFFSET_PROP(EFunctionFlags, FunctionFlags);
     OFFSET_PROP(void*, Func);

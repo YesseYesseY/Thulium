@@ -3,5 +3,5 @@
 
 class UFortPlaylist : public UPrimaryDataAsset
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPlaylist");
+    STATIC_CLASS(UFortPlaylist);
 };

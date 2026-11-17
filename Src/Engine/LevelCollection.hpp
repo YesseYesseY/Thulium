@@ -3,7 +3,7 @@
 
 struct FLevelCollection
 {
-    STATIC_STRUCT(FLevelCollection, L"/Script/Engine.LevelCollection");
+    STATIC_STRUCT(FLevelCollection);
 
     STRUCT_PROP(UNetDriver*, NetDriver);
 };

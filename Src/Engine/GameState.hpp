@@ -3,5 +3,5 @@
 
 class AGameState : public AGameStateBase
 {
-    STATIC_CLASS(L"/Script/Engine.GameState");
+    STATIC_CLASS(AGameState);
 };

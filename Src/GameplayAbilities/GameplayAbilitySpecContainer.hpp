@@ -4,7 +4,7 @@
 
 struct FGameplayAbilitySpecContainer : public FFastArraySerializer
 {
-    STATIC_STRUCT(FGameplayAbilitySpecContainer, L"/Script/GameplayAbilities.GameplayAbilitySpecContainer");
+    STATIC_STRUCT(FGameplayAbilitySpecContainer);
 
     STRUCT_PROP(TArray<FGameplayAbilitySpec>, Items);
 };

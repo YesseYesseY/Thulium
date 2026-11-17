@@ -3,5 +3,5 @@
 
 class UGameplayAbility : public UObject
 {
-    STATIC_CLASS(L"/Script/GameplayAbilities.GameplayAbility");
+    STATIC_CLASS(UGameplayAbility);
 };

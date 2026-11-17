@@ -3,7 +3,7 @@
 
 class UClass : public UStruct
 {
-    STATIC_CLASS(L"/Script/CoreUObject.Class");
+    STATIC_CLASS(UClass);
 
     OFFSET_PROP(UObject*, DefaultObject);
 

@@ -3,7 +3,7 @@
 
 struct FURL
 {
-    STATIC_STRUCT(FURL, L"/Script/Engine.URL");
+    STATIC_STRUCT(FURL);
 
     STRUCT_PROP(int32, Port);
 };

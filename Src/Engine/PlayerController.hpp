@@ -6,7 +6,7 @@ class APawn;
 
 class APlayerController : public AController
 {
-    STATIC_CLASS(L"/Script/Engine.PlayerController");
+    STATIC_CLASS(APlayerController);
 
     CLASS_PROP(APawn*, AcknowledgedPawn);
     CLASS_PROP(UObject*, CheatManager);

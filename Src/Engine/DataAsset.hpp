@@ -3,5 +3,5 @@
 
 class UDataAsset : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.DataAsset");
+    STATIC_CLASS(UDataAsset);
 };

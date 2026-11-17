@@ -3,5 +3,5 @@
 
 class ABuildingTimeOfDayLights : public ABuildingAutoNav
 {
-    STATIC_CLASS(L"/Script/FortniteGame.BuildingTimeOfDayLights");
+    STATIC_CLASS(ABuildingTimeOfDayLights);
 };

@@ -4,7 +4,7 @@
 
 class AFortPlayerController : public APlayerController
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPlayerController");
+    STATIC_CLASS(AFortPlayerController);
 
     CLASS_PROP(AFortInventory*, WorldInventory);
 

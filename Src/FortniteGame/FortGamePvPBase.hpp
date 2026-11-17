@@ -3,5 +3,5 @@
 
 class AFortGamePvPBase : public AFortGameModeZone
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortGamePvPBase");
+    STATIC_CLASS(AFortGamePvPBase);
 };

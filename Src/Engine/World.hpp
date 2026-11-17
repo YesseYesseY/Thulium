@@ -43,7 +43,7 @@ struct FActorSpawnParameters
 
 class UWorld : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.World");
+    STATIC_CLASS(UWorld);
 
     CLASS_PROP(UNetDriver*, NetDriver);
     CLASS_PROP(TArray<FLevelCollection>, LevelCollections);

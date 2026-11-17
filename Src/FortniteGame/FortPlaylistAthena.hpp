@@ -3,7 +3,7 @@
 
 class UFortPlaylistAthena : public UFortPlaylist
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPlaylistAthena");
+    STATIC_CLASS(UFortPlaylistAthena);
 
     CLASS_PROP(int32, PlaylistId);
 };

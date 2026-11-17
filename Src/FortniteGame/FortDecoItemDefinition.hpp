@@ -3,5 +3,5 @@
 
 class UFortDecoItemDefinition : public UFortWeaponItemDefinition
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortDecoItemDefinition");
+    STATIC_CLASS(UFortDecoItemDefinition);
 };

@@ -5,13 +5,7 @@
 
 class UGameplayStatics : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.GameplayStatics");
-
-    static UGameplayStatics* DefaultObj()
-    {
-        static auto Ret = StaticClass()->DefaultObject;
-        return (UGameplayStatics*)Ret;
-    }
+    STATIC_CLASS(UGameplayStatics);
 
     static UObject* SpawnObject(UClass* Class, UObject* Outer)
     {

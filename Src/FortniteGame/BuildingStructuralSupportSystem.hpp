@@ -4,8 +4,7 @@
 
 class UBuildingStructuralSupportSystem : public UObject
 {
-    STATIC_CLASS(L"/Script/FortniteGame.BuildingStructuralSupportSystem");
-    CLASS_GET(UBuildingStructuralSupportSystem);
+    STATIC_CLASS(UBuildingStructuralSupportSystem);
 
 private:
     EFortStructuralGridQueryResults CanAddBuildingActorClassToGrid(UClass* BuildingSMActorClassToCheck, const FVector& Location, const FRotator& Rotation, bool bMirrored, TArray<ABuildingActor*>* OutExistingBuildings, bool bAllowStaticOverlap)

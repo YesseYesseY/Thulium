@@ -3,5 +3,5 @@
 
 class UGameplayTasksComponent : public UActorComponent
 {
-    STATIC_CLASS(L"/Script/GameplayTasks.GameplayTasksComponent")
+    STATIC_CLASS(UGameplayTasksComponent);
 };

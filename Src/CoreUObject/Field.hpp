@@ -3,7 +3,7 @@
 
 class UField : public UObject
 {
-    STATIC_CLASS(L"/Script/CoreUObject.Field");
+    STATIC_CLASS(UField);
 
     UField* Next;
 };

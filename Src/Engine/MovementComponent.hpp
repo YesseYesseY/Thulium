@@ -3,7 +3,7 @@
 
 class UMovementComponent : public UActorComponent
 {
-    STATIC_CLASS(L"/Script/Engine.MovementComponent");
+    STATIC_CLASS(UMovementComponent);
 
     CLASS_PROP(FVector, Velocity);
 };

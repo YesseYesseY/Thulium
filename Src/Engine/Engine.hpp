@@ -4,7 +4,7 @@
 
 class UEngine : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.Engine");
+    STATIC_CLASS(UEngine);
 
     CLASS_PROP(UGameViewportClient*, GameViewport);
 

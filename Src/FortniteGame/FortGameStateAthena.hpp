@@ -4,7 +4,7 @@
 
 class AFortGameStateAthena : public AFortGameStatePvP
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortGameStateAthena");
+    STATIC_CLASS(AFortGameStateAthena);
 
     CLASS_PROP(int32, CurrentPlaylistId);
     CLASS_PROP(UFortPlaylistAthena*, CurrentPlaylistData);

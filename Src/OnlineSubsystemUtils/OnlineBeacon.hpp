@@ -4,7 +4,7 @@
 
 class AOnlineBeacon : public AActor
 {
-    STATIC_CLASS(L"/Script/OnlineSubsystemUtils.OnlineBeacon");
+    STATIC_CLASS(AOnlineBeacon);
 
     CLASS_PROP(UNetDriver*, NetDriver);
 

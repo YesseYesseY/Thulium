@@ -2,7 +2,7 @@
 
 struct FBuildingClassData
 {
-    STATIC_STRUCT(FBuildingClassData, L"/Script/FortniteGame.BuildingClassData");
+    STATIC_STRUCT(FBuildingClassData);
 
     STRUCT_PROP(UClass*, BuildingClass);
 };

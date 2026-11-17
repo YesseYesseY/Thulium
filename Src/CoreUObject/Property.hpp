@@ -65,7 +65,7 @@ ENUM_CLASS_FLAGS(EPropertyFlags);
 
 class UProperty : public UField
 {
-    STATIC_CLASS(L"/Script/CoreUObject.Property");
+    STATIC_CLASS(UProperty);
 
     OFFSET_PROP(EPropertyFlags, PropertyFlags);
     OFFSET_PROP(int32, Offset);

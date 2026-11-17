@@ -3,7 +3,7 @@
 
 class AFortGameMode : public AGameMode
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortGameMode");
+    STATIC_CLASS(AFortGameMode);
 
     CLASS_BIT(bWorldIsReady);
 };

@@ -6,7 +6,7 @@ class UFunction;
 
 class UStruct : public UField
 {
-    STATIC_CLASS(L"/Script/CoreUObject.Struct");
+    STATIC_CLASS(UStruct);
 
     OFFSET_PROP(UStruct*, Super);
     OFFSET_PROP(UField*, Children);

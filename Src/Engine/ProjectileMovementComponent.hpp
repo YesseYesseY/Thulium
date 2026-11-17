@@ -3,7 +3,7 @@
 
 class UProjectileMovementComponent : public UMovementComponent
 {
-    STATIC_CLASS(L"/Script/Engine.ProjectileMovementComponent");
+    STATIC_CLASS(UProjectileMovementComponent);
 
     CLASS_PROP(float, MaxSpeed);
 };

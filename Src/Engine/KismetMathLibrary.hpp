@@ -2,13 +2,7 @@
 
 class UKismetMathLibrary : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.KismetMathLibrary");
-
-    static UKismetMathLibrary* DefaultObj()
-    {
-        static auto Ret = StaticClass()->DefaultObject;
-        return (UKismetMathLibrary*)Ret;
-    }
+    STATIC_CLASS(UKismetMathLibrary);
 
     static int32 RandomInteger(int32 Max)
     {

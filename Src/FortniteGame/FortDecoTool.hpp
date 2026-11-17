@@ -3,7 +3,7 @@
 
 class AFortDecoTool : public AFortWeapon
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortDecoTool");
+    STATIC_CLASS(AFortDecoTool);
 
     CLASS_PROP(UFortItemDefinition*, ItemDefinition);
 

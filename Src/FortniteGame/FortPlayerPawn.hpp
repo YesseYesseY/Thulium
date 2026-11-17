@@ -3,5 +3,5 @@
 
 class AFortPlayerPawn : public AFortPawn
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPlayerPawn");
+    STATIC_CLASS(AFortPlayerPawn);
 };

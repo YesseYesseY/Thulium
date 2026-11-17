@@ -4,7 +4,7 @@
 
 class AFortWeap_EditingTool : public AFortWeap_BuildingToolBase
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortWeap_EditingTool");
+    STATIC_CLASS(AFortWeap_EditingTool);
 
     CLASS_PROP(ABuildingSMActor*, EditActor);
 

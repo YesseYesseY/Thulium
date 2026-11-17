@@ -3,13 +3,7 @@
 
 class UKismetSystemLibrary : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.KismetSystemLibrary");
-
-    static UKismetSystemLibrary* DefaultObj()
-    {
-        static auto Ret = StaticClass()->DefaultObject;
-        return (UKismetSystemLibrary*)Ret;
-    }
+    STATIC_CLASS(UKismetSystemLibrary);
 
     static void ExecuteConsoleCommand(const wchar_t* Cmd)
     {

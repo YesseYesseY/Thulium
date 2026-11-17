@@ -4,7 +4,7 @@
 
 class AFortGameModeZone : public AFortGameMode
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortGameModeZone");
+    STATIC_CLASS(AFortGameModeZone);
 
     CLASS_PROP(TArray<FItemAndCount>, StartingItems);
 };

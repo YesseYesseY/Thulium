@@ -3,5 +3,5 @@
 
 class AFortPlayerControllerPvP : public AFortPlayerControllerZone
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPlayerControllerPvP");
+    STATIC_CLASS(AFortPlayerControllerPvP);
 };

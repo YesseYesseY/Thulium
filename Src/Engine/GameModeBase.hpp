@@ -5,7 +5,7 @@
 
 class AGameModeBase : public AActor
 {
-    STATIC_CLASS(L"/Script/Engine.GameModeBase");
+    STATIC_CLASS(AGameModeBase);
 
     CLASS_PROP(AGameStateBase*, GameState);
     CLASS_PROP(UClass*, DefaultPawnClass);

@@ -3,5 +3,5 @@
 
 class AFortWeapon : public AActor
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortWeapon");
+    STATIC_CLASS(AFortWeapon);
 };

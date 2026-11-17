@@ -3,5 +3,5 @@
 
 class AFortTrapTool : public AFortDecoTool
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortDecoTool");
+    STATIC_CLASS(AFortDecoTool);
 };

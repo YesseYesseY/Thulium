@@ -58,7 +58,7 @@ public:
 
 class UConsole : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.Console");
+    STATIC_CLASS(UConsole);
 
     OFFSET_PROP(TArray<FAutoCompleteCommand>, AutoCompleteList);
     OFFSET_PROP(FAutoCompleteNode, AutoCompleteTree);

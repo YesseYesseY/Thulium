@@ -4,7 +4,7 @@
 
 struct FGameplayAbilitySpec : public FFastArraySerializerItem
 {
-    STATIC_STRUCT(FGameplayAbilitySpec, L"/Script/GameplayAbilities.GameplayAbilitySpec");
+    STATIC_STRUCT(FGameplayAbilitySpec);
 
     STRUCT_PROP(FGameplayAbilitySpecHandle, Handle);
     STRUCT_PROP(UGameplayAbility*, Ability);

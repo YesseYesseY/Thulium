@@ -3,5 +3,5 @@
 
 class UFortItem : public UObject
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortItem");
+    STATIC_CLASS(UFortItem);
 };

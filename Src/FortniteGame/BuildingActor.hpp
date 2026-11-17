@@ -4,7 +4,7 @@
 
 class ABuildingActor : public AActor
 {
-    STATIC_CLASS(L"/Script/FortniteGame.BuildingActor");
+    STATIC_CLASS(ABuildingActor);
 
     void InitializeKismetSpawnedBuildingActor(ABuildingActor* BuildingOwner, AFortPlayerController* SpawningController)
     {

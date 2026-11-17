@@ -3,5 +3,5 @@
 
 class AInfo : public AActor
 {
-    STATIC_CLASS(L"/Script/Engine.Info");
+    STATIC_CLASS(AInfo);
 };

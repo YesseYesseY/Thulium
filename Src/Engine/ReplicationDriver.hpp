@@ -3,7 +3,7 @@
 
 class UReplicationDriver : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.ReplicationDriver");
+    STATIC_CLASS(UReplicationDriver);
 
 private:
     static inline void (*_ServerReplicateActors)(UReplicationDriver*, float) = nullptr;

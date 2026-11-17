@@ -4,7 +4,7 @@
 
 class UFortAbilitySet : public UPrimaryDataAsset
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortAbilitySet");
+    STATIC_CLASS(UFortAbilitySet);
 
     CLASS_PROP(TArray<UClass*>, GameplayAbilities);
 

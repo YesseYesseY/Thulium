@@ -3,7 +3,7 @@
 
 class UGameInstance : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.GameInstance");
+    STATIC_CLASS(UGameInstance);
 
     CLASS_PROP(TArray<ULocalPlayer*>, LocalPlayers);
 };

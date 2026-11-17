@@ -3,5 +3,5 @@
 
 class UCheatManager : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.CheatManager");
+    STATIC_CLASS(UCheatManager);
 };

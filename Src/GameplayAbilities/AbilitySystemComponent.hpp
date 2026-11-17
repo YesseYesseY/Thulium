@@ -7,7 +7,7 @@
 
 class UAbilitySystemComponent : public UGameplayTasksComponent
 {
-    STATIC_CLASS(L"/Script/GameplayAbilities.AbilitySystemComponent");
+    STATIC_CLASS(UAbilitySystemComponent);
 
     CLASS_PROP(FGameplayAbilitySpecContainer, ActivatableAbilities);
 

@@ -3,7 +3,7 @@
 
 class UEnum : public UField
 {
-    STATIC_CLASS(L"/Script/CoreUObject.Enum");
+    STATIC_CLASS(UEnum);
 
     OFFSET_PROP(TArray<TPair<FName COMMA int64>>, Names);
 

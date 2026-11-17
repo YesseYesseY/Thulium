@@ -3,5 +3,5 @@
 
 class UFortTrapItemDefinition : public UFortDecoItemDefinition
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortTrapItemDefinition");
+    STATIC_CLASS(UFortTrapItemDefinition);
 };

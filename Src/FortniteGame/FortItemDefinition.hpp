@@ -6,7 +6,7 @@
 // Technically the base class is UMcpItemDefinitionBase
 class UFortItemDefinition : public UPrimaryDataAsset
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortItemDefinition");
+    STATIC_CLASS(UFortItemDefinition);
 
     CLASS_PROP(uint8, ItemType);
 

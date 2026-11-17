@@ -5,7 +5,7 @@
 
 class AFortPlayerState : public APlayerState
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPlayerState");
+    STATIC_CLASS(AFortPlayerState);
 
     CLASS_PROP(UFortAbilitySystemComponent*, AbilitySystemComponent);
 

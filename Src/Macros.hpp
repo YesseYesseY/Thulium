@@ -17,33 +17,32 @@
 
 #define COMMA ,
 
-#define STATIC_CLASS(Name) \
+#define STATIC_CLASS_BASIC(Type) \
 public: \
     static UClass* StaticClass() \
     { \
-        static UClass* Ret = UObject::FindClass(Name); \
+        static UClass* Ret = UObject::FindClassFast(&#Type[1]); \
         return Ret; \
     }
 
-#define DEFAULT_OBJ(Name) \
-    static Name* DefaultObj() \
+#define STATIC_CLASS(Type) \
+    STATIC_CLASS_BASIC(Type) \
+    static Type* DefaultObj() \
     { \
-        return (Name*)StaticClass()->DefaultObject; \
-    }
-
-#define CLASS_GET(Name) \
-    static Name* Get() \
+        return (Type*)DefaultObjectWrapper(StaticClass()); \
+    } \
+    static Type* Get() \
     { \
-        Name* Ret = UObject::FindFirstObjectOfClass<Name>(); \
+        Type* Ret = UObject::FindFirstObjectOfClass<Type>(); \
         return Ret; \
     }
 
 
 
-#define STATIC_STRUCT(Type, Name) \
+#define STATIC_STRUCT(Type) \
     static UStruct* StaticStruct() \
     { \
-        static UStruct* Ret = UObject::FindStruct(Name); \
+        static UStruct* Ret = UObject::FindStructFast(&#Type[1]); \
         return Ret; \
     } \
     static int32 Size() \

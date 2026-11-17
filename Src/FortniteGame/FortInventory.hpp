@@ -5,7 +5,7 @@
 
 class AFortInventory : public AActor
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortInventory");
+    STATIC_CLASS(AFortInventory);
 
     CLASS_PROP(FFortItemList, Inventory);
 

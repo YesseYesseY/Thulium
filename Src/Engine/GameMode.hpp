@@ -3,7 +3,7 @@
 
 class AGameMode : public AGameModeBase
 {
-    STATIC_CLASS(L"/Script/Engine.GameMode");
+    STATIC_CLASS(AGameMode);
 
     CLASS_PROP(int32, NumPlayers);
 };

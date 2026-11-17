@@ -3,7 +3,7 @@
 
 struct FFastArraySerializer
 {
-    STATIC_STRUCT(FFastArraySerializer, L"/Script/Engine.FastArraySerializer");
+    STATIC_STRUCT(FFastArraySerializer);
 
     TMap<int32, int32> ItemMap;
     int32 IDCounter;

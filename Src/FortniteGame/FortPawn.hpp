@@ -6,7 +6,7 @@
 
 class AFortPawn : public ACharacter
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPawn");
+    STATIC_CLASS(AFortPawn);
 
     AFortWeapon* EquipWeaponDefinition(UFortWeaponItemDefinition* WeaponData, const FGuid& ItemEntryGuid)
     {

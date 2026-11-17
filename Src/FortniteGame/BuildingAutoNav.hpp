@@ -3,5 +3,5 @@
 
 class ABuildingAutoNav : public ABuildingSMActor
 {
-    STATIC_CLASS(L"/Script/FortniteGame.BuildingAutoNav");
+    STATIC_CLASS(ABuildingAutoNav);
 };

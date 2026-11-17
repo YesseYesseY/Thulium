@@ -3,5 +3,5 @@
 
 class UFortResourceItemDefinition : public UFortWorldItemDefinition
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortResourceItemDefinition");
+    STATIC_CLASS(UFortResourceItemDefinition);
 };

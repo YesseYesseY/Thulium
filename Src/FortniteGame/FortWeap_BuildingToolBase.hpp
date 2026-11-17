@@ -3,5 +3,5 @@
 
 class AFortWeap_BuildingToolBase : public AFortWeapon
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortWeap_BuildingToolBase");
+    STATIC_CLASS(AFortWeap_BuildingToolBase);
 };

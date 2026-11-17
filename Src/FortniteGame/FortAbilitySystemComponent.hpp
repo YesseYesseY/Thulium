@@ -3,5 +3,5 @@
 
 class UFortAbilitySystemComponent : public UAbilitySystemComponent
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortAbilitySystemComponent");
+    STATIC_CLASS(UFortAbilitySystemComponent);
 };

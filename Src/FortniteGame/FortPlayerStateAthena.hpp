@@ -3,5 +3,5 @@
 
 class AFortPlayerStateAthena : public AFortPlayerStatePvP
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPlayerStateAthena");
+    STATIC_CLASS(AFortPlayerStateAthena);
 };

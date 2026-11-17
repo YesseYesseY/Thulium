@@ -3,5 +3,5 @@
 
 class ALevelScriptActor : public AActor
 {
-    STATIC_CLASS(L"/Script/Engine.LevelScriptActor")
+    STATIC_CLASS(ALevelScriptActor)
 };

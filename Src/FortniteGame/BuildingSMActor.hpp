@@ -4,7 +4,7 @@
 
 class ABuildingSMActor : public ABuildingActor
 {
-    STATIC_CLASS(L"/Script/FortniteGame.BuildingSMActor");
+    STATIC_CLASS(ABuildingSMActor);
 
     CLASS_PROP(AFortPlayerStateZone*, EditingPlayer);
 

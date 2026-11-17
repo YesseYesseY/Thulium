@@ -6,7 +6,7 @@ class UWorld;
 
 class UNetDriver : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.NetDriver");
+    STATIC_CLASS(UNetDriver);
 
     CLASS_PROP(FName, NetDriverName);
     CLASS_PROP(UReplicationDriver*, ReplicationDriver);

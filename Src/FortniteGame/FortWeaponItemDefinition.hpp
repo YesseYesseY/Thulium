@@ -3,5 +3,5 @@
 
 class UFortWeaponItemDefinition : public UFortWorldItemDefinition
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortWeaponItemDefinition");
+    STATIC_CLASS(UFortWeaponItemDefinition);
 };

@@ -5,7 +5,7 @@
 
 struct FFortItemList : public FFastArraySerializer
 {
-    STATIC_STRUCT(FFortItemList, L"/Script/FortniteGame.FortItemList");
+    STATIC_STRUCT(FFortItemList);
 
     STRUCT_PROP(TArray<FFortItemEntry>, ReplicatedEntries);
     STRUCT_PROP(TArray<UFortWorldItem*>, ItemInstances);

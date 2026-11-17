@@ -4,7 +4,7 @@
 
 class UFortWorldItem : public UFortItem
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortWorldItem");
+    STATIC_CLASS(UFortWorldItem);
 
     CLASS_PROP(FFortItemEntry, ItemEntry);
 };

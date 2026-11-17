@@ -12,7 +12,7 @@
 
 class AFortPlayerControllerAthena : public AFortPlayerControllerPvP
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPlayerControllerAthena");
+    STATIC_CLASS(AFortPlayerControllerAthena);
 
 public:
     static void ServerAcknowledgePossessionHook(AFortPlayerControllerAthena* This, APawn* Pawn)

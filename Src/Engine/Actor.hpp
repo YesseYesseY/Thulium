@@ -4,7 +4,7 @@
 
 class AActor : public UObject
 {
-    STATIC_CLASS(L"/Script/Engine.Actor");
+    STATIC_CLASS(AActor);
 
     CLASS_BIT(bReplicateMovement);
     CLASS_PROP(float, NetPriority);

@@ -3,7 +3,7 @@
 
 class AOnlineBeaconHost : public AOnlineBeacon
 {
-    STATIC_CLASS(L"/Script/OnlineSubsystemUtils.OnlineBeaconHost");
+    STATIC_CLASS(AOnlineBeaconHost);
 
     CLASS_PROP(int32, ListenPort);
 

@@ -9,7 +9,7 @@
 
 class AFortPickup : public AActor
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortPickup");
+    STATIC_CLASS(AFortPickup);
 
     CLASS_PROP(FFortItemEntry, PrimaryPickupItemEntry);
     CLASS_PROP(UProjectileMovementComponent*, MovementComponent);

@@ -4,7 +4,7 @@
 
 class UFortInventoryOwnerInterface
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortInventoryOwnerInterface");
+    STATIC_CLASS_BASIC(UFortInventoryOwnerInterface);
 
 private:
     static inline int32 ControllerOffset = -1;

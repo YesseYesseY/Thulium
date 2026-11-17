@@ -3,5 +3,5 @@
 
 class AFortOnlineBeaconHost : public AOnlineBeaconHost
 {
-    STATIC_CLASS(L"/Script/FortniteGame.FortOnlineBeaconHost");
+    STATIC_CLASS(AFortOnlineBeaconHost);
 };

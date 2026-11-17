@@ -3,5 +3,5 @@
 
 class ULocalPlayer : public UPlayer
 {
-    STATIC_CLASS(L"/Script/Engine.LocalPlayer");
+    STATIC_CLASS(ULocalPlayer);
 };
